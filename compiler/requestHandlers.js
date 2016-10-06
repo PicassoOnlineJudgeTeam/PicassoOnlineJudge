@@ -1,6 +1,7 @@
 var exec = require("child_process").exec;
 var querystring = require("querystring");
 var sync = require('sync');
+var fs = require('fs');
 
 function start(response, postData) {
   console.log("Request handler 'start' was called.");
@@ -35,8 +36,12 @@ function start(response, postData) {
 function upload(response, postData) {
   console.log("Request handler 'upload' was called.");
   response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("You've sent the text(postData)\n"
-    + querystring.parse(postData).text + "\n\n")
+  response.write("Received data(postData) : \n"
+    + querystring.parse(postData).text + "\n\n");
+  fs.writeFile('./source.py', querystring.parse(postData).text, function(err) {
+    if(err) throw err;
+    console.log('File write completed');
+  });
   exec("./judge.sh", function(error, stdout, stderr){
     response.write(stdout);
     response.end();
