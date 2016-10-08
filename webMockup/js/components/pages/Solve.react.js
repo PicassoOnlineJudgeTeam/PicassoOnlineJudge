@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import ModalForm from '../ModalForm.react';
 
 class Solve extends Component {
   render() {
@@ -18,7 +19,7 @@ class Solve extends Component {
           <h1>Solve</h1>
           <textarea name="source" id="source" cols="95" rows="30"></textarea>
           <div>
-            <Link to="/visualize" className="btn btn--visualize">visualize</Link>
+            <ModalForm/>
           </div>
         </section>
       </article>

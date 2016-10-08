@@ -10,7 +10,9 @@
     "react-redux": "^4.0.0",
     "react-router": "2.0.0-rc5",
     "redux": "^3.0.4",
-    "redux-thunk": "^1.0.0"
+    "redux-thunk": "^1.0.0",
+    "semantic-ui-css": "^2.2.4",
+    "semantic-ui-react": "^0.54.5"
   },
   "devDependencies": {
     "appcache-webpack-plugin": "^1.2.0",
@@ -42,10 +44,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hyunki/3-2project.git"
+    "url": "git://github.com/PicassoOnlineJudgeTeam/PicassoOnlineJudge"
   },
   "scripts": {
-    "start": "NODE_ENV=development node server.js",
+    "start": "node server.js",
     "build": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors -p"
   },
   "author": "Picasso",

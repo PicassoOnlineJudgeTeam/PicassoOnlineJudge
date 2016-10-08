@@ -23,3 +23,14 @@
   color: white;
   background-color: $brand-color;
 }
+
+#btn {
+    padding: 0.5em 1.5em;
+    background-color: white;
+    color: $brand-color;
+    border: 1px solid $brand-color;
+    border-radius: 3px;
+    text-decoration: none;
+    user-select: none;
+    display: inline-block;
+}
