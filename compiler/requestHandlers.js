@@ -1,6 +1,5 @@
 var exec = require("child_process").exec;
 var querystring = require("querystring");
-var sync = require('sync');
 var fs = require('fs');
 
 function start(response, postData) {
