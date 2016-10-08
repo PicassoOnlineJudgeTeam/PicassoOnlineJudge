@@ -17,7 +17,9 @@ Node.js가 필요함.
     npm install
     node server.js
 
-http://localhost:3000 에서 확인가능
+http://localhost:3000 에서 확인
+
+온라인 서버 : http://203.253.198.201:3000/
 
 ### visualizer
 Python, Bottle 서버 프레임워크 필요함
@@ -25,7 +27,10 @@ Python, Bottle 서버 프레임워크 필요함
     cd visualizer/v3
     pip install bottle
     python bootle_server.py
-http://localhost:8003/index.html 에서 확인가능
+http://localhost:8003/index.html 에서 확인.
+
+온라인 서버 : http://203.253.198.201:8003/index.html
+
 
 ### compiler
 Node.js가 필요함.
@@ -33,3 +38,4 @@ Node.js가 필요함.
     cd compiler
     node index.js
 http://localhost:8888/ 에서 확인가능
+온라인 서버 : http://203.253.198.201:8888/
