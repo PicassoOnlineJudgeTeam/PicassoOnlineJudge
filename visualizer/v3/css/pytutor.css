@@ -497,7 +497,9 @@ div.ExecutionVisualizer div.highlightedStackFrame {
 
 div.ExecutionVisualizer div.stackFrame,
 div.ExecutionVisualizer div.highlightedStackFrame {
-  border-left: 1px solid #a6b3b6;
+  /*border-left: 1px solid #a6b3b6;*/
+  border: 2px dashed;
+  border-radius: 5px;
 }
 
 
@@ -518,14 +520,17 @@ div.ExecutionVisualizer td.stackFrameVar {
 
 div.ExecutionVisualizer td.stackFrameValue {
   text-align: left;
-  border-bottom: 1px solid #aaaaaa;
-  border-left: 1px solid #aaaaaa;
+  /*border-bottom: 1px solid #aaaaaa;
+  border-left: 1px solid #aaaaaa;*/
+  border:solid 1px #000000;
+  border-radius: 5px;
 
   vertical-align: middle;
 
-  padding-top: 3px;
+  /*padding-top: 3px;
   padding-left: 3px;
-  padding-bottom: 3px;
+  padding-bottom: 3px;*/
+  padding: 5px;
 }
 
 div.ExecutionVisualizer .stackFrameVarTable tr {

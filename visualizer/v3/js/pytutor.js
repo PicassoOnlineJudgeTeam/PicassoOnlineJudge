@@ -417,7 +417,7 @@ ExecutionVisualizer.prototype.render = function() {
        <span id="liveModeSpan" style="display: none;">| <a id="editLiveModeBtn" href="#">Live programming</a></a>\
        </div>\
        <div id="legendDiv"/>\
-       <div id="executionSliderDocs"><font color="#e93f34">NEW!</font> Click on a line of code to set a breakpoint. Then use the Forward and Back buttons to jump there.</div>\
+       <!--div id="executionSliderDocs"><font color="#e93f34">NEW!</font> Click on a line of code to set a breakpoint. Then use the Forward and Back buttons to jump there.</div-->\
        <div id="executionSlider"/>\
        <div id="executionSliderFooter"/>\
        <div id="vcrControls">\
@@ -525,8 +525,8 @@ ExecutionVisualizer.prototype.render = function() {
 
   if (this.params.arrowLines) {
       this.domRoot.find('#legendDiv')
-          .append('<svg id="prevLegendArrowSVG"/> line that has just executed')
-          .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> next line to execute</p>');
+          .append('<svg id="prevLegendArrowSVG"/> 현재 실행중인 라인')
+          .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> 다음 실행할 라인</p>');
       
       myViz.domRootD3.select('svg#prevLegendArrowSVG')
           .append('polygon')
@@ -540,8 +540,8 @@ ExecutionVisualizer.prototype.render = function() {
   }
   else if (this.params.highlightLines) {
       myViz.domRoot.find('#legendDiv')
-          .append('<span class="highlight-legend highlight-prev">line that has just executed</span> ')
-          .append('<span class="highlight-legend highlight-cur">next line to execute</span>')
+          .append('<span class="highlight-legend highlight-prev">현재 실행중인 라인</span> ')
+          .append('<span class="highlight-legend highlight-cur">다음 실행할 라인</span>')
   }
   else if (this.params.pyCrazyMode) {
       myViz.domRoot.find('#legendDiv')
@@ -636,7 +636,7 @@ ExecutionVisualizer.prototype.render = function() {
 
     // add an extra label to link back to the main site, so that viewers
     // on the embedded page know that they're seeing an OPT visualization
-    this.domRoot.find('#codeDisplayDiv').append('<div style="font-size: 8pt; margin-bottom: 20px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Online Python Tutor</a> by <a href="http://www.pgbovine.net/" target="_blank" style="color: #3D58A2;">Philip Guo</a></div>');
+    //this.domRoot.find('#codeDisplayDiv').append('<div style="font-size: 8pt; margin-bottom: 20px;">Visualized using <a href="http://pythontutor.com" target="_blank" style="color: #3D58A2;">Online Python Tutor</a> by <a href="http://www.pgbovine.net/" target="_blank" style="color: #3D58A2;">Philip Guo</a></div>');
 
     myViz.domRoot.find('#executionSliderDocs').hide(); // cut out extraneous docs
   }
@@ -3732,8 +3732,9 @@ function(objID, stepNum, d3DomElement, isTopLevel) {
       if (obj[2].length > 0) {
         superclassStr += ('[extends ' + obj[2].join(', ') + '] ');
       }
-      d3DomElement.append('<div class="typeLabel">' + typeLabelPrefix + obj[1] + ' class ' + superclassStr +
-                          '<br/>' + '<a href="#" id="attrToggleLink">hide attributes</a>' + '</div>');
+      d3DomElement.append('<div class="typeLabel">' + typeLabelPrefix + obj[1] + ' class ' + superclassStr
+                          //+ '<br/>' + '<a href="#" id="attrToggleLink">hide attributes</a>'
+                           + '</div>');
     }
 
     // right now, let's NOT display class members, since that clutters
