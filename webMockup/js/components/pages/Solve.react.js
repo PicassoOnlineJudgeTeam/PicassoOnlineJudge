@@ -15,25 +15,25 @@ class Solve extends Component {
 
     render() {
         let source = ""
-        +"# use lists\n"
-        +"x = None\n"
-        +"for i in range(6, 0, -1):\n"
-        +"    x = [i, x]\n"
-        +"\n"
-        +"# use tuples\n"
-        +"y = None\n"
-        +"for i in range(6, 0, -1):\n"
-        +"    y = (i, y)\n"
-        +"\n"
-        +"x[1][0]=y[1][1]\n";
+                    + "# use lists\n"
+                    + "x = None\n"
+                    + "for i in range(6, 0, -1):\n"
+                    + "    x = [i, x]\n"
+                    + "\n"
+                    + "# use tuples\n"
+                    + "y = None\n"
+                    + "for i in range(6, 0, -1):\n"
+                    + "    y = (i, y)\n"
+                    + "\n"
+                    + "x[1][0]=y[1][1]\n";
     return (
       <article>
         <section className="text-section">
           <h1>Solve</h1>
-          <textarea name="source" id="source" cols="95" rows="30">
+          <textarea name="source" id="source" cols="105" rows="30">
               {source}
           </textarea>
-          <div>
+          <div style={{position:"relative", top:"10px", left:"680px"}}>
             <ModalForm/>
           </div>
         </section>

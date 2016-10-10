@@ -14,7 +14,7 @@ class ModalForm extends Component {
     const { open, closeOnEscape, closeOnDocumentClick } = this.state
     return (
       <div>
-        <Button className="btn btn--modal" id="btn" onClick={this.closeConfigShow(true, false)}>modal</Button>
+        <Button className="btn btn--modal" id="btn" onClick={this.closeConfigShow(true, false)}>Submit</Button>
 
         <Modal
           open={open}
@@ -26,19 +26,29 @@ class ModalForm extends Component {
             Congrats, you solved this challenge!
           </Modal.Header>
           <Modal.Content>
-            <p>Test Case #0    Pass</p>
+            <Icon color='green' name='users' />
+            &nbsp; <b>Test Case #0 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
             <Link to="/visualize" className="btn" negative>View</Link>
           </Modal.Actions>
           <Modal.Content>
-               <p>Test Case #1    Pass</p>
+            <Icon color='green' name='users' />
+            &nbsp; <b>Test Case #1 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
             <Link to="/visualize" className="btn" negative>View</Link>
           </Modal.Actions>
           <Modal.Content>
-            <p>All Pass</p>
+            <Icon color='green' name='users' />
+            &nbsp; <b>Test Case #2 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
+          </Modal.Content>
+          <Modal.Actions>
+            <Link to="/visualize" className="btn" negative>View</Link>
+          </Modal.Actions>
+          <Modal.Content>
+            <Icon color='green' name='users' />
+            &nbsp; <b>All Pass</b>
           </Modal.Content>
           <Modal.Actions>
             <Link to="/Dashboard" className="btn" negative>Return</Link>

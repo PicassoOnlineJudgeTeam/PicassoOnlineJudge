@@ -26,8 +26,8 @@ class Visualize extends Component {
       <article>
         <section className="text-section">
           <h1>Visualize</h1>
-            <img src="../../../img/codeVisual.png" alt=""/>
-          <div style={{float:"right"}}>
+            <img src="../../../img/codeVisual.png" alt="" style={{position:"relative", left:"100px"}}/>
+          <div style={{position:"relative", top:"10px", left:"680px"}}>
             <Link to="/dashboard" className="btn btn--dashboard">Dashboard</Link>
             <Link to="/solve" className="btn btn--solve">Solve</Link>
           </div>

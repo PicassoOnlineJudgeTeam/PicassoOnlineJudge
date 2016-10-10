@@ -95,7 +95,7 @@ class Question extends Component {
           </div>
         </section>
         <div style={{align:"center"}}>
-            <Link to="/solve" className="btn btn--solve">Solve</Link>
+            <Link to="/solve" className="btn btn--solve" style={{position:"relative", left:"700px"}}>Solve</Link>
         </div>
       </article>
     );

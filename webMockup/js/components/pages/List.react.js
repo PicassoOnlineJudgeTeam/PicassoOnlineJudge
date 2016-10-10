@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import ListForm from '../ListForm.react'
 
 
 let style = {
@@ -53,12 +54,37 @@ class List extends Component {
                 <tbody style={style.td}>
                     <tr>
                         <td> </td>
-                        <td>ALCHEMY</td>
-                        <td style={{textAlign: "left"}}><Link to="question">Alcemy</Link></td>
-                        <td>LeStar</td>
+                        <td>MERCY</td>
+                        <td style={{textAlign: "left"}}><Link to="question">Mercy</Link></td>
+                        <td>Lex2Star</td>
                         <td>123</td>
                         <td>43%</td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td>ALCHEMY</td>
+                        <td style={{textAlign: "left"}}><Link to="question">Alcemy</Link></td>
+                        <td>Lex2Star</td>
+                        <td>320</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr>
+                        <td>O</td>
+                        <td>BASEBALL</td>
+                        <td style={{textAlign: "left"}}><Link to="question">2016프로야구</Link></td>
+                        <td>Lex2Star</td>
+                        <td>343</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>FISH</td>
+                        <td style={{textAlign: "left"}}><Link to="question">Fish</Link></td>
+                        <td>Lex2Star</td>
+                        <td>34</td>
+                        <td>10%</td>
+                    </tr>
+                    <ListForm/>
                 </tbody>
           </table>
         </section>
