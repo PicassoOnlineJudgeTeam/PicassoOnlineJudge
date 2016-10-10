@@ -12,12 +12,27 @@ import { connect } from 'react-redux';
 import ModalForm from '../ModalForm.react';
 
 class Solve extends Component {
-  render() {
+
+    render() {
+        let source = ""
+        +"# use lists\n"
+        +"x = None\n"
+        +"for i in range(6, 0, -1):\n"
+        +"    x = [i, x]\n"
+        +"\n"
+        +"# use tuples\n"
+        +"y = None\n"
+        +"for i in range(6, 0, -1):\n"
+        +"    y = (i, y)\n"
+        +"\n"
+        +"x[1][0]=y[1][1]\n";
     return (
       <article>
         <section className="text-section">
           <h1>Solve</h1>
-          <textarea name="source" id="source" cols="95" rows="30"></textarea>
+          <textarea name="source" id="source" cols="95" rows="30">
+              {source}
+          </textarea>
           <div>
             <ModalForm/>
           </div>
