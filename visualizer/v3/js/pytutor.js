@@ -1663,13 +1663,13 @@ ExecutionVisualizer.prototype.updateOutputFull = function(smoothTransition) {
 
   if (isLastInstr) {
     if (this.promptForUserInput || this.promptForMouseInput) {
-      vcrControls.find("#curInstr").html('<b><font color="' + brightRed + '">Enter user input below:</font></b>');
+      vcrControls.find("#curInstr").html('<b><font color="' + brightRed + '">유저 입력을 입력하십시오 : </font></b>');// 한글화 Enter user input below:
     }
     else if (this.instrLimitReached) {
       vcrControls.find("#curInstr").html("Instruction limit reached");
     }
     else {
-      vcrControls.find("#curInstr").html("Program terminated");
+      vcrControls.find("#curInstr").html("프로그램 종료"); // 한글화
     }
   }
   else {
@@ -1704,7 +1704,7 @@ ExecutionVisualizer.prototype.updateOutputFull = function(smoothTransition) {
     assert(curEntry.exception_msg);
 
     if (curEntry.exception_msg == "Unknown error") {
-      myViz.domRoot.find("#errorOutput").html('Unknown error: Please email a bug report to philip@pgbovine.net');
+      myViz.domRoot.find("#errorOutput").html('Unknown error'); // : Please email a bug report to philip@pgbovine.net
     }
     else {
       myViz.domRoot.find("#errorOutput").html(htmlspecialchars(curEntry.exception_msg));
