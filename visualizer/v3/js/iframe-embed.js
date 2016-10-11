@@ -168,7 +168,8 @@ $(document).ready(function() {
 
   // log a generic AJAX error handler
   $(document).ajaxError(function() {
-    alert("Ugh, Online Python Tutor server error :( Email philip@pgbovine.net");
+    alert("error")
+    //alert("Ugh, Online Python Tutor server error :( Email philip@pgbovine.net");
   });
 
 
