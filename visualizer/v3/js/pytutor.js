@@ -423,7 +423,7 @@ ExecutionVisualizer.prototype.render = function() {
        <div id="vcrControls">\
          <button id="jmpFirstInstr", type="button">&lt;&lt; First</button>\
          <button id="jmpStepBack", type="button">&lt; Back</button>\
-         <span id="curInstr">Step ? of ?</span>\
+         <span id="curInstr">단계 ? / ?</span>\
          <button id="jmpStepFwd", type="button">Forward &gt;</button>\
          <button id="jmpLastInstr", type="button">Last &gt;&gt;</button>\
        </div>\
@@ -453,13 +453,13 @@ ExecutionVisualizer.prototype.render = function() {
          <tr>\
            <td id="stack_td">\
              <div id="globals_area">\
-               <div id="stackHeader">Frames</div>\
+               <div id="stackHeader">블록</div>\
              </div>\
              <div id="stack"></div>\
            </td>\
            <td id="heap_td">\
              <div id="heap">\
-               <div id="heapHeader">Objects</div>\
+               <div id="heapHeader">객체</div>\
              </div>\
            </td>\
          </tr>\
@@ -708,7 +708,7 @@ ExecutionVisualizer.prototype.render = function() {
   // (note that we need to keep #globals_area separate from #stack for d3 to work its magic)
   this.domRoot.find("#globals_area").append('<div class="stackFrame" id="'
     + myViz.generateID('globals') + '"><div id="' + myViz.generateID('globals_header')
-    + '" class="stackFrameHeader">' + this.getRealLabel('Global frame') + '</div><table class="stackFrameVarTable" id="'
+    + '" class="stackFrameHeader">' + this.getRealLabel('전역') + '</div><table class="stackFrameVarTable" id="'
     + myViz.generateID('global_table') + '"></table></div>');
 
 
@@ -1673,9 +1673,9 @@ ExecutionVisualizer.prototype.updateOutputFull = function(smoothTransition) {
     }
   }
   else {
-    vcrControls.find("#curInstr").html("Step " +
+    vcrControls.find("#curInstr").html("단계 " +
                                        String(this.curInstr + 1) +
-                                       " of " + String(totalInstrs-1));
+                                       " / " + String(totalInstrs-1));
   }
 
 
@@ -2529,7 +2529,7 @@ ExecutionVisualizer.prototype.renderDataStructures = function(curEntry, curTople
   // not really using d3 to the fullest, but oh wells!
   myViz.domRoot.find('#heap')
     .empty()
-    .html('<div id="heapHeader">Objects</div>');
+    .html('<div id="heapHeader">객체</div>');
 
 
   var heapRows = myViz.domRootD3.select('#heap')
@@ -2862,10 +2862,10 @@ ExecutionVisualizer.prototype.renderDataStructures = function(curEntry, curTople
       // optional (btw, this isn't a CSS id)
       if (frame.parent_frame_id_list.length > 0) {
         var parentFrameID = frame.parent_frame_id_list[0];
-        headerLabel = headerLabel + ' [parent=f' + parentFrameID + ']';
+        headerLabel = headerLabel + ' [부모=f' + parentFrameID + ']';
       }
       else if (myViz.showAllFrameLabels) {
-        headerLabel = headerLabel + ' [parent=Global]';
+        headerLabel = headerLabel + ' [부모=전역]';
       }
 
       return headerLabel;
@@ -3832,10 +3832,10 @@ function(objID, stepNum, d3DomElement, isTopLevel) {
     var funcPrefix = myViz.compactFuncLabels ? 'func' : '';
 
     if (parentFrameID) {
-      d3DomElement.append('<div class="funcObj">' + funcPrefix + ' ' + funcName + ' [parent=f'+ parentFrameID + ']</div>');
+      d3DomElement.append('<div class="funcObj">' + funcPrefix + ' ' + funcName + ' [부모=f'+ parentFrameID + ']</div>');
     }
     else if (myViz.showAllFrameLabels) {
-      d3DomElement.append('<div class="funcObj">' + funcPrefix + ' ' + funcName + ' [parent=Global]</div>');
+      d3DomElement.append('<div class="funcObj">' + funcPrefix + ' ' + funcName + ' [부모=전역]</div>');
     }
     else {
       d3DomElement.append('<div class="funcObj">' + funcPrefix + ' ' + funcName + '</div>');
@@ -3985,7 +3985,7 @@ ExecutionVisualizer.prototype.redrawConnectors = function() {
   this.jsPlumbInstance.repaintEverything();
 }
 
-
+// TODO 한글화 해야 하는 부분
 ExecutionVisualizer.prototype.getRealLabel = function(label) {
   if (this.params.lang === 'js' || this.params.lang === 'ts' || this.params.lang === 'ruby') {
     if (label === 'list') {
@@ -4016,7 +4016,7 @@ ExecutionVisualizer.prototype.getRealLabel = function(label) {
       return 'method';
     } else if (label === 'None') {
       return 'nil';
-    } else if (label === 'Global frame') {
+    } else if (label === '전역') {
       return 'Global Object';
     }
   }
