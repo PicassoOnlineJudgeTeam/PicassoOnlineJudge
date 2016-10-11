@@ -1,3 +1,6 @@
 #!/bin/python3
-print(input())
-print(input())
+import sys
+n = int(input().strip())
+arr = input().strip().split(" ")
+arr.reverse()
+print(" ".join(arr), end="")
