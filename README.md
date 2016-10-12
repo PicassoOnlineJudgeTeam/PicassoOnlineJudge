@@ -37,8 +37,8 @@ http://localhost:8003/index.html 에서 확인.
 ### compiler
 Node.js가 필요함.
 ```
-    cd compiler
-    node index.js
+cd compiler
+node index.js
 ```
 
 http://localhost:8888/ 에서 확인가능
