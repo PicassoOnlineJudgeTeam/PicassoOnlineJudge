@@ -443,7 +443,8 @@ ExecutionVisualizer.prototype.render = function() {
   var outputsHTML =
     '<div id="htmlOutputDiv"></div>\
      <div id="progOutputs">\
-       <div id="printOutputDocs">Print output (drag lower right corner to resize)</div>\n\
+       <!--div id="printOutputDocs">Print output (drag lower right corner to resize)</div-->\n\
+       <div id="printOutputDocs">출력</div>\n\
        <textarea id="pyStdout" cols="40" rows="5" wrap="off" readonly></textarea>\
      </div>';
 
