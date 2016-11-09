@@ -30,21 +30,21 @@ class ModalForm extends Component {
             &nbsp; <b>Test Case #0 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
-            <Link to="/visualize" className="btn" negative>View</Link>
+          <Button id="btn" onClick={function(){window.open("http://localhost:8003/iframe-embed.html#code=a_var+%3D+'global+value'%0Adef+outer(%29%3A%0A++a_var+%3D+'enclosed+value'%0A%0A++def+inner(%29%3A%0A++++a_var+%3D+'local+value'%0A++++print(a_var%29%0A++++def+inner2(%29%3A%0A++++++++a_var+%3D+'local+value2'%0A++++++++print(a_var%29%0A++++inner2(%29%0A++inner(%29%0A%0Aouter(%29&mode=display&origin=&cumulative=false&heapPrimitives=&textReferences=&py=2&rawInputLstJSON=%5B%5D&curInstr=0")}}>No</Button>
           </Modal.Actions>
           <Modal.Content>
             <Icon color='green' name='users' />
             &nbsp; <b>Test Case #1 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
-            <Link to="/visualize" className="btn" negative>View</Link>
+            <Button id="btn" onClick={console.log("hmm")}>View</Button>
           </Modal.Actions>
           <Modal.Content>
             <Icon color='green' name='users' />
             &nbsp; <b>Test Case #2 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
-            <Link to="/visualize" className="btn" negative>View</Link>
+            <Button id="btn" onClick={console.log("hmm")}>View</Button>
           </Modal.Actions>
           <Modal.Content>
             <Icon color='green' name='users' />
