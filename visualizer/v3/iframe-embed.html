@@ -22,7 +22,37 @@
 
 <script type="text/javascript" src="js/opt-frontend-common.js"></script>
 <script type="text/javascript" src="js/iframe-embed.js"></script>
+<script type="text/javascript">
+/*
+function onReady(myVisualizer){
+	console.log(myVisualizer);
+	myVisualizer.add_pytutor_hook(
+		"end_renderDataStructures",
+		function(args) {
+			console.log("end_renderDataStructures");
+			var myViz = args.obj; // unpack
+			innerFrameArrange(myViz);
+			return [false]; // didn't handle it, let someone else
+		}
+	);
+}
+*/
+function innerFrameArrange(){
+	$($('.stackFrame').get().reverse()).each(function(idx, aFrame){
+		aFrame = $(aFrame);
+		if (!aFrame.attr('data-parent_frame_id'))
+			return;
+		var parentFrame = $('div [data-frame_id=' + aFrame.attr('data-parent_frame_id') + ']');
+		if (!parentFrame)
+			return;
+		parentFrame.append(aFrame.remove());
+	});
+}
+$(document).ready(function(){
+	var iInterval = setInterval(function(){innerFrameArrange()}, 100);
+});
 
+</script>
 </head>
 
 <body>

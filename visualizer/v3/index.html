@@ -100,6 +100,10 @@ def outer():
   def inner():
     a_var = 'local value'
     print(a_var)
+    def inner2():
+        a_var = 'local value2'
+        print(a_var)
+    inner2()
   inner()
 
 outer()</textarea>
