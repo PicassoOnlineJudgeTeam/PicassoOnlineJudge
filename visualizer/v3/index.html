@@ -81,11 +81,23 @@ function getAppState(txt) {
   }
   return ret;
 }
+function simpleState(txt){
+  return {code: txt,
+            mode: 'display', 
+            origin: undefined, 
+            cumulative: false,
+            heapPrimitives: undefined, 
+            textReferences: undefined, 
+            py: '2', 
+            rawInputLstJSON: '[]', 
+            curInstr: 0
+         };
+}
 function gen(){
-	var state = getAppState($('#source').val());
+	var state = simpleState($('#source').val());
 	var embedUrlStr = $.param.fragment(window.location.origin + "/iframe-embed.html", state, 2 /* clobber all */);
-    embedUrlStr = embedUrlStr.replace(/\)/g, '%29') // replace ) with %29 so that links embed well in Markdown
-    console.log(state);
+  embedUrlStr = embedUrlStr.replace(/\)/g, '%29') // replace ) with %29 so that links embed well in Markdown
+  console.log(embedUrlStr);
 	window.open(embedUrlStr);
 }
 </script>
