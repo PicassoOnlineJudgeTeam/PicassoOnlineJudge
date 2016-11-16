@@ -9,6 +9,7 @@ new WebpackDevServer(webpack(config), { // Start a server
   hot: true, // With hot reloading
   inline: false,
   historyApiFallback: true,
+  headers: {"Access-Control-Allow-Origin": "*"},
   quiet: true // Without logging
 }).listen(3000, '0.0.0.0', function (err, result) {
   if (err) {
