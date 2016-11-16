@@ -84,8 +84,8 @@ class List extends Component {
                         <td>34</td>
                         <td>10%</td>
                     </tr>
-                    <ListForm/>
                 </tbody>
+                <ListForm/>
           </table>
         </section>
       </article>

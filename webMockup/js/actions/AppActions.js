@@ -227,3 +227,16 @@ function anyElementsEmpty(elements) {
   }
   return false;
 }
+
+/** Others  */
+//export const REQ_QUESTIONS = "REQ_QUESTIONS";
+// https://velopert.com/1552
+import { REQ_QUESTIONS } from '../constants/AppConstants';
+export function requestQuestions(value) {
+  var obj = {
+      type: REQ_QUESTIONS,
+      value: value
+  };
+  //console.log(obj);
+  return obj;
+};

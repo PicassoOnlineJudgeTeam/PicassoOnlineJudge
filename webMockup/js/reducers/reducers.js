@@ -10,7 +10,7 @@
  *   });
  */
 
-import { CHANGE_FORM, SET_AUTH, SENDING_REQUEST } from '../constants/AppConstants';
+import { CHANGE_FORM, SET_AUTH, SENDING_REQUEST, REQ_QUESTIONS } from '../constants/AppConstants';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
 const assign = Object.assign || require('object.assign');
@@ -44,6 +44,11 @@ export function homeReducer(state = initialState, action) {
         currentlySending: action.sending
       });
       break;
+      
+    case REQ_QUESTIONS:
+      return Object.assign({}, state, {
+          value: action.value // ??
+      });
     default:
       return state;
   }

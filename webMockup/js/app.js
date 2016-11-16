@@ -47,6 +47,9 @@ openSansObserver.check().then(() => {
 }, (err) => {
   document.body.classList.remove('js-open-sans-loaded');
 });
+//
+//var Questions = require('./models/question');
+//import Question2 from './models/question';
 
 // Import the components used as pages
 import HomePage from './components/pages/HomePage.react';
