@@ -30,7 +30,9 @@ class Visualize extends Component {
             <div style={{position:"relative", top:"-45px", left:"680px"}}>
                 <Link to="/solve" className="btn btn--solve">Return</Link>
             </div>
-            <VisualForm/>
+            <div>
+                <VisualForm/>
+            </div>
           </section>
         </article>
     );
