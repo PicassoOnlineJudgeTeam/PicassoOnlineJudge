@@ -66,7 +66,7 @@ class Row extends Component {
             <tr>
                 <td></td>
                 <td>{this.props.obj.id}</td>
-                <td>{this.props.obj.name}</td>
+                <td style={{textAlign: "left"}}><Link to="/question">{this.props.obj.name}</Link></td>
                 <td>{this.props.obj.author}</td>
                 <td>{this.props.obj.count}</td>
                 <td></td>
