@@ -12,24 +12,13 @@
 # I had to replace cStringIO with io and urllib2 with urllib, for
 # compatibility from 2.x to 3.x Ii was running from /v3/).
 
-from bottle import Bottle, response, route, get, request, run, template, static_file
+from bottle import route, get, request, run, template, static_file
 import StringIO # NB: don't use cStringIO since it doesn't support unicode!!!
 import json
 import pg_logger
 import urllib
 import urllib2
 
-app = Bottle()
-
-# @app.hook('after_request')
-# def enable_cors():
-#     """
-#     You need to add some headers to each request.
-#     Don't use the wildcard '*' for Access-Control-Allow-Origin in production.
-#     """
-#     response.headers['Access-Control-Allow-Origin'] = '*'
-#     response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, OPTIONS'
-#     response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 # dummy routes for testing only
 @route('/web_exec_<name:re:.+>.py')
 def web_exec(name):
@@ -125,4 +114,4 @@ if n_fail == 0:
 
 if __name__ == "__main__":
     #run(host='localhost', port=8080, reloader=True)
-    run(app, host='0.0.0.0', port=8003, reloader=True) # make it externally visible - DANGER this is very insecure since there's no sandboxing!
+    run(host='0.0.0.0', port=8003, reloader=True) # make it externally visible - DANGER this is very insecure since there's no sandboxing!
