@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import VisualForm from '../VisualForm.react';
 
 let style = {
     cmd : {
@@ -23,16 +24,21 @@ let style = {
 class Visualize extends Component {
   render() {
     return (
-      <article>
-        <section className="text-section">
-          <h1>Visualize</h1>
-            <img src="../../../img/codeVisual.png" alt="" style={{position:"relative", left:"100px"}}/>
-          <div style={{position:"relative", top:"10px", left:"680px"}}>
-            <Link to="/dashboard" className="btn btn--dashboard">Dashboard</Link>
-            <Link to="/solve" className="btn btn--solve">Solve</Link>
-          </div>
-        </section>
-      </article>
+      <div>
+          <div id="vis"></div>
+          <VisualForm/>
+
+          <article>
+            <section className="text-section">
+              <h1>Visualize</h1>
+                <img src="../../../img/codeVisual.png" alt="" style={{position:"relative", left:"100px"}}/>
+              <div style={{position:"relative", top:"10px", left:"600px"}}>
+                <Link to="/dashboard" className="btn btn--dashboard">Dashboard</Link>
+                <Link to="/solve" className="btn btn--solve">Solve</Link>
+              </div>
+            </section>
+          </article>
+      </div>
     );
   }
 }
