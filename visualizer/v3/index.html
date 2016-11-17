@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="kr">
+<head>
+<meta charset="UTF-8">
+<title>Picasso's Online Judge</title>
+<!-- requirements for pytutor.js -->
+<script type="text/javascript" src="js/d3.v2.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.ba-bbq.min.js"></script> <!-- for handling back button and URL hashes -->
+<script type="text/javascript" src="js/jquery.ba-dotimeout.min.js"></script> <!-- for event debouncing -->
+<script type="text/javascript" src="js/jquery.jsPlumb-1.3.10-all-min.js "></script> <!-- for rendering SVG connectors
+                                                                                         DO NOT UPGRADE ABOVE 1.3.10 OR ELSE BREAKAGE WILL OCCUR -->
+<script type="text/javascript" src="js/diff_match_patch.js"></script>
+
+<script type="text/javascript" src="js/jquery-ui-1.11.4/jquery-ui.min.js"></script> <!-- for sliders and other UI elements -->
+<link type="text/css" href="js/jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet" />
+
+<!-- for annotation bubbles -->
+<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+<link type="text/css" href="css/jquery.qtip.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/pytutor.js"></script>
+<link rel="stylesheet" href="css/pytutor.css"/>
+
+<script type="text/javascript" src="js/holistic.js"></script>
+<link rel="stylesheet" href="css/holistic.css"/>
+
+<!-- requirements for opt-frontend.js -->
+
+<!-- Ace online code editor -->
+<script type="text/javascript" src="js/ace/src-min-noconflict/ace.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="js/opt-frontend-common.js"></script>
+<script type="text/javascript" src="js/opt-frontend.js"></script>
+<link rel="stylesheet" href="css/opt-frontend.css"/>
+
+<!-- include this AFTER opt-frontend.js so that configuration
+     global variables are already defined at load time -->
+<script type="text/javascript" src="js/togetherjs/togetherjs-min.js"></script>
+
+<script type="text/javascript" src="js/socket.io-client/socket.io.js"></script>
+
+<script type="text/javascript" src="js/opt-testcases.js"></script>
+<link rel="stylesheet" href="css/opt-testcases.css"/>
+
+
+<script>
+function getAppState(txt) {
+  assert(originFrontendJsFile); // global var defined in each frontend
+
+  var ret = {code: txt,
+             mode: 'display', //appMode,
+             origin: undefined, //originFrontendJsFile,
+             cumulative: false,//$('#cumulativeModeSelector').val(),
+             heapPrimitives: undefined, // $('#heapPrimitivesSelector').val(),
+             textReferences: undefined, //$('#textualMemoryLabelsSelector').val(),
+             py: '2', //$('#pythonVersionSelector').val(),
+             /* ALWAYS JSON serialize rawInputLst, even if it's empty! */
+             rawInputLstJSON: '[]', //JSON.stringify(rawInputLst),
+             curInstr: 0//myVisualizer ? myVisualizer.curInstr : undefined
+         };
+
+  // keep this really clean by avoiding undefined values
+  if (ret.cumulative === undefined)
+    delete ret.cumulative;
+  if (ret.heapPrimitives === undefined)
+    delete ret.heapPrimitives;
+  if (ret.textReferences === undefined)
+    delete ret.textReferences;
+  if (ret.py === undefined)
+    delete ret.py;
+  if (ret.rawInputLstJSON === undefined)
+    delete ret.rawInputLstJSON;
+  if (ret.curInstr === undefined)
+    delete ret.curInstr;
+
+  // different frontends can optionally AUGMENT the app state with
+  // custom fields
+  if (typeof(appStateAugmenter) !== 'undefined') {
+    appStateAugmenter(ret);
+  }
+  return ret;
+}
+function simpleState(txt){
+  return {code: txt,
+            mode: 'display', 
+            origin: undefined, 
+            cumulative: false,
+            heapPrimitives: undefined, 
+            textReferences: undefined, 
+            py: '2', 
+            rawInputLstJSON: '[]', 
+            curInstr: 0
+         };
+}
+function gen(){
+	var state = simpleState($('#source').val());
+	var embedUrlStr = $.param.fragment(window.location.origin + "/iframe-embed.html", state, 2 /* clobber all */);
+  embedUrlStr = embedUrlStr.replace(/\)/g, '%29') // replace ) with %29 so that links embed well in Markdown
+  console.log(embedUrlStr);
+	window.open(embedUrlStr);
+}
+</script>
+</head>
+<body>
+<header></header>
+<div class="wrap">
+	<textarea id="source" rows="20" cols="40">a_var = 'global value'
+def outer():
+  a_var = 'enclosed value'
+
+  def inner():
+    a_var = 'local value'
+    print(a_var)
+    def inner2():
+        a_var = 'local value2'
+        print(a_var)
+    inner2()
+  inner()
+
+outer()</textarea>
+	<button onclick="gen()">Submit</button>
+	<br/>
+  <!--
+	<iframe width="800" height="500" frameborder="0"
+        src="//localhost:8003/iframe-embed.html#code=x+%3D+5%0Ay+%3D+10%0Az+%3D+x+%2B+y&cumulative=false&py=2&curInstr=3">
+	</iframe>
+	<iframe width="800" height="500" frameborder="0"
+    src="//localhost:8003/iframe-embed.html#code=%23+use+lists%0Ax+%3D+None%0Afor+i+in+range(6,+0,+-1)%3A%0A++x+%3D+%5Bi,+x%5D%0A%0A%23+use+tuples%0Ay+%3D+None%0Afor+i+in+range(6,+0,+-1)%3A%0A++y+%3D+(i,+y)%0A%0Ax%5B1%5D%5B0%5D%3Dy%5B1%5D%5B1%5D+%23+courtesy+of+John+DeNero!&cumulative=false&py=2&curInstr=0&verticalStack=true">
+	</iframe>
+	<iframe width="800" height="500" frameborder="0"
+        src="//203.253.198.201:8003/iframe-embed.html#code=%23+use+lists%0Ax+%3D+None%0Afor+i+in+range(6,+0,+-1)%3A%0A++x+%3D+%5Bi,+x%5D%0A%0A%23+use+tuples%0Ay+%3D+None%0Afor+i+in+range(6,+0,+-1)%3A%0A++y+%3D+(i,+y)%0A%0Ax%5B1%5D%5B0%5D%3Dy%5B1%5D%5B1%5D+%23+courtesy+of+John+DeNero!&cumulative=false&py=2&curInstr=0&verticalStack=true">
+	</iframe>
+  -->
+</div>
+</body>
+</html>
