@@ -44,12 +44,12 @@ class List extends Component {
           <table style={style.table}>
                 <thead style={style.thead}>
                     <tr>
-                        <th style={{width:"100px"}}>풀었나?</th>
+                        <th style={{width:"70px"}}>풀었나?</th>
                         <th style={{width:"150px"}}>문제ID</th>
-                        <th style={{width:"250px"}}>문제제목</th>
+                        <th style={{width:"300px"}}>문제제목</th>
                         <th style={{width:"120px"}}>출제자</th>
                         <th style={{width:"120px"}}>시도횟수</th>
-                        <th style={{width:"120px"}}>정답비율</th>
+                        <th style={{width:"100px"}}>정답비율</th>
                     </tr>
                 </thead>
                 <ListForm />

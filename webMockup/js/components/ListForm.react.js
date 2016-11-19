@@ -6,12 +6,21 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { requestQuestions } from '../actions/AppActions';
 
+let style = {
+    td : {
+        "width": "350px",
+        "padding": "10px",
+        "verticalAlign": "top",
+        "borderBottom": "1px solid #ccc"
+    }
+}
+
 class ListForm extends Component {
 
   componentDidMount() {
       let tryAjax = () => {
           axios.get('/api/questions').then(response => {
-              console.log(response.data);
+              //console.log(response.data);
               //this.props.onReceive(response.data);
               this.setState({value:response.data});
               //console.log(this.state.value);
@@ -24,13 +33,13 @@ class ListForm extends Component {
   }
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     if (this.state && this.state.value){
         var rtn = this.state.value.map(function(object, i){
             return <Row obj={object} key={i} />;
         });
         return (
-            <tbody id="list_form">
+            <tbody id="list_form" style={{borderBottom:"1px solid #ccc"}}>
                 {rtn}
             </tbody>
         );

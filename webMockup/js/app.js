@@ -113,6 +113,7 @@ ReactDOM.render(
           <Route path="/question" component={Question} />
           <Route path="/question/:id" component={Question} />
           <Route path="/solve" component={Solve} />
+          <Route path="/solve/:id" component={Solve} />
           <Route path="/visualize" component={Visualize} />
         </Route>
         <Route path="*" component={NotFound} />

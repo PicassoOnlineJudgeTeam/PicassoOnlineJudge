@@ -37,13 +37,13 @@ class QuestionForm extends Component {
   componentDidMount() {
       let tryAjax = () => {
           axios.get('/api/questions').then(response => {
-              console.log(response.data);
-              console.log(this.props);
+              //console.log(response.data);
+              //console.log(this.props);
               //this.props.onReceive(response.data);
               for (var v in response.data) {
 
                 if(response.data[v].id === this.props.id){
-                    console.log(response.data[v]);
+                    //console.log(response.data[v]);
                     this.setState({value:response.data[v]});
                 }
               }
@@ -57,11 +57,10 @@ class QuestionForm extends Component {
   }
 
   render() {
-      console.log(this.state);
+      var sLink = "/solve/" + this.props.id;
+
       if (this.state && this.state.value){
-        //   var rtn = this.state.value(function(object, i){
-        //       return <ContentForm obj={object} key={i} />;
-        //   });
+          //console.log(this.state.value);
           return (
               <article>
                 <section className="text-section">
@@ -104,22 +103,22 @@ class QuestionForm extends Component {
                         </tbody>
                   </table>
                   <h3>문제</h3>
-                  <p>{this.state.value.content}</p>
+                  <NewLineText text={this.state.value.content}/>
                   <h3>입력</h3>
-                  <p>{this.state.value.input}</p>
+                  <NewLineText text={this.state.value.input}/>
                   <h3>출력</h3>
-                  <p>{this.state.value.output}</p>
+                  <NewLineText text={this.state.value.output}/>
                   <h3>예제입력</h3>
                   <div style={style.cmd}>
-                    {this.state.value.exInput}
+                    <NewLineText text={this.state.value.exInput}/>
                   </div>
                   <h3>예제출력</h3>
                   <div style={style.cmd}>
-                    {this.state.value.exOutput}
+                    <NewLineText text={this.state.value.exOutput}/>
                   </div>
                 </section>
                 <div style={{align:"center"}}>
-                    <Link to="/solve" className="btn btn--solve" style={{position:"relative", left:"700px"}}>Solve</Link>
+                    <Link to={sLink} className="btn btn--solve" style={{position:"relative", left:"700px"}}>Solve</Link>
                 </div>
               </article>
           );
@@ -131,68 +130,17 @@ class QuestionForm extends Component {
   }
 }
 
-class ContentForm extends Component {
+class NewLineText extends Component {
     render () {
-        return (
-            <article>
-              <section className="text-section">
-                <h1>Question</h1>
-                <h3>문제 정보</h3>
-                <table style={style.table}>
-                      <thead style={style.thead}>
-                          <tr>
-                              <th style={{width:"120px"}}>문제ID</th>
-                              <th style={{width:"150px"}}>시간제한</th>
-                              <th style={{width:"250px"}}>메모리제한</th>
-                              <th style={{width:"120px"}}>제출횟수</th>
-                              <th style={{width:"120px"}}>정답횟수(비율)</th>
-                          </tr>
-                      </thead>
-                      <tbody style={style.td}>
-                          <tr>
-                              <td>{this.state.value.id}</td>
-                              <td>{this.state.value.ltdTime}</td>
-                              <td>65536kb</td>
-                              <td>{this.state.value.count}</td>
-                              <td>{this.state.value.comCount}(49%)</td>
-                          </tr>
-                      </tbody>
-                </table>
-                <table style={style.table}>
-                      <thead style={style.thead}>
-                          <tr>
-                              <th style={{width:"230px"}}>출제자</th>
-                              <th style={{width:"300px"}}>출처</th>
-                              <th style={{width:"230px"}}>분류</th>
-                          </tr>
-                      </thead>
-                      <tbody style={style.td}>
-                          <tr>
-                              <td>this.state.value.author</td>
-                              <td>this.state.value.origin</td>
-                              <td> </td>
-                          </tr>
-                      </tbody>
-                </table>
-                <h3>문제</h3>
-                <p>{this.state.value.content}</p>
-                <h3>입력</h3>
-                <p>this.state.value.input</p>
-                <h3>출력</h3>
-                <p>{this.state.value.output}</p>
-                <h3>예제입력</h3>
-                <div style={style.cmd}>
-                  {this.state.value.exInput}
-                </div>
-                <h3>예제출력</h3>
-                <div style={style.cmd}>
-                  {this.state.value.exOutput}
-                </div>
-              </section>
-              <div style={{align:"center"}}>
-                  <Link to="/solve" className="btn btn--solve" style={{position:"relative", left:"700px"}}>Solve</Link>
-              </div>
-            </article>
+        //console.log(this.props);
+        var strArr = this.props.text.split("\n");
+        var addPTag = strArr.map(function(value, i) {
+            return <p key={i}>{value}</p>;
+        });
+        return(
+            <div>
+                {addPTag}
+            </div>
         );
     }
 }
