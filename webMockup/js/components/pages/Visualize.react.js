@@ -28,7 +28,7 @@ class Visualize extends Component {
           <section className="text-section">
             <h1>Visualize</h1>
             <div style={{position:"relative", top:"-45px", left:"680px"}}>
-                <Link to="/solve" className="btn btn--solve">Return</Link>
+                <Link to="/solve" className="btn btn--solve">Solve</Link>
             </div>
             <div>
                 <VisualForm/>
