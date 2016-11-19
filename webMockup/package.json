@@ -6,6 +6,7 @@
     "axios": "^0.15.2",
     "bcryptjs": "2.3.0",
     "fontfaceobserver": "^1.5.1",
+    "mongoose": "^4.6.8",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-iframe": "0.0.4",

@@ -111,6 +111,7 @@ ReactDOM.render(
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/list" component={List} />
           <Route path="/question" component={Question} />
+          <Route path="/question/:id" component={Question} />
           <Route path="/solve" component={Solve} />
           <Route path="/visualize" component={Visualize} />
         </Route>

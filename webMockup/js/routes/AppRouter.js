@@ -16,4 +16,14 @@ router.get(
     }
 );
 
+router.get(
+    '/questions/:id',
+    function(req, res, next){
+        Questions.find(function(err, questions){
+            if(err) {res.status(500).json({error: 'database failure'}); return;}
+            res.json(questions);
+        })
+    }
+);
+
 module.exports = router;

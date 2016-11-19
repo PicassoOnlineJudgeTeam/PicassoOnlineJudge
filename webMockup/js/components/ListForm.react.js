@@ -11,10 +11,10 @@ class ListForm extends Component {
   componentDidMount() {
       let tryAjax = () => {
           axios.get('/api/questions').then(response => {
-              //console.log(response.data);
+              console.log(response.data);
               //this.props.onReceive(response.data);
               this.setState({value:response.data});
-              console.log(this.state.value);
+              //console.log(this.state.value);
               //setTimeout(tryAjax, 1000 * 5); // REPEAT THIS EVERy 5 SECONDS
           });
       }
@@ -24,16 +24,6 @@ class ListForm extends Component {
   }
 
   render() {
-    // return (
-    //     <tr>
-    //         <td>O</td>
-    //         <td>GAME</td>
-    //         <td style={{textAlign: "left"}}><Link to="question">Game</Link></td>
-    //         <td>Lex2Star</td>
-    //         <td>456</td>
-    //         <td>75%</td>
-    //     </tr>
-    // )
     console.log(this.state);
     if (this.state && this.state.value){
         var rtn = this.state.value.map(function(object, i){
@@ -62,11 +52,12 @@ class ListForm extends Component {
 }
 class Row extends Component {
     render () {
+        var qLink = "/question/" + this.props.obj.id;
         return (
             <tr>
                 <td></td>
                 <td>{this.props.obj.id}</td>
-                <td style={{textAlign: "left"}}><Link to="/question">{this.props.obj.name}</Link></td>
+                <td style={{textAlign: "left"}}><Link to={qLink}>{this.props.obj.name}</Link></td>
                 <td>{this.props.obj.author}</td>
                 <td>{this.props.obj.count}</td>
                 <td></td>
