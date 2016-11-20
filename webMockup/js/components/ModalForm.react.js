@@ -16,6 +16,20 @@ class ModalForm extends Component {
       });
     }
     tryAjax();
+
+    let tryAjax2 = () => {
+        axios.post('/api/addLog', {
+            questionID: this.props.qid,
+            memberID: this.props.user,
+            size:"1.3kb",
+            result : "pass",
+            time : "200ms",
+            submitTime : "2016-11-20 20:49"
+        }).then( response => {
+            console.log(response);
+        });
+    }
+    tryAjax2();
   }
 
   close = () => this.setState({ open: false })

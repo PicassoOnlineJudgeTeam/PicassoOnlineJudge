@@ -11,6 +11,8 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ModalForm from '../ModalForm.react';
 
+let localStorage = global.window.localStorage;
+
 class Solve extends Component {
 
     render() {
@@ -33,7 +35,7 @@ class Solve extends Component {
           <textarea name="source" id="source" cols="105" rows="30" defaultValue={source}>
           </textarea>
           <div style={{position:"relative", top:"10px", left:"680px"}}>
-            <ModalForm qid={this.props.params.id}/>
+            <ModalForm qid={this.props.params.id} user={localStorage.loggedInUser}/>
           </div>
         </section>
       </article>

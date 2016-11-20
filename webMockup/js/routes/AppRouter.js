@@ -50,10 +50,29 @@ router.get(
     }
 );
 
+router.post(
+    '/addLog',
+    function(req, res, next) {
+        var log = new SolvedLogs({
+            'questionID': req.body.questionID,
+            'memberID': req.body.memberID,
+            'size': req.body.size,
+            'result': req.body.result,
+            'time': req.body.time,
+            'submitTime': req.body.submitTime
+        });
+
+        log.save(function(err){
+            if(err) {res.status(500).json({result:0}); return;}
+            res.json({result:1});
+        })
+    }
+)
+
 router.get(
     '/testWithSource/:obj',
     function(req, res, next) {
-        let obj = JSON.parse(decodeURIComponent(req.params.obj));
+        var obj = JSON.parse(decodeURIComponent(req.params.obj));
         Questions.findOne({id: obj.qid}, function(err, question){
             if(err) {res.status(500).json({error: 'database failure'}); return;}
             var arr = [];
