@@ -91,21 +91,26 @@ router.get(
     }
 );
 
+function trim(str) {
+    return str.replace( /(^\s*)|(\s*$)/g, "" );
+}
 
 function test(idx, source, sysin, sysout, callback){
-    fs.writeFile('./source' + idx + '.py', source.trim(), function(err) {
+    fs.writeFile('./source' + idx + '.py', trim(source), function(err) {
         if(err) throw err;
-    });
-    fs.writeFile('./input' + idx + '.txt', sysin.trim(), function(err) {
-        if(err) throw err;
-    });
-    fs.writeFile('./output' + idx + '.txt', sysout.trim(), function(err) {
-        if(err) throw err;
-    });
-    exec("python3 source" + idx + ".py < input" + idx + ".txt > result" + idx + ".txt 2> error" + idx + ".txt; (diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");", function(error, stdout, stderr){
-        console.log(idx + "res : " + stdout + "|");
-        console.log("python3 source" + idx + ".py < input" + idx + ".txt > result" + idx + ".txt 2> error" + idx + ".txt; (diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");");
-        callback(idx, stdout.indexOf("PASS") != -1);
+        fs.writeFile('./input' + idx + '.txt', trim(sysin) + '\n', function(err) {
+            if(err) throw err;
+            fs.writeFile('./output' + idx + '.txt', trim(sysout) + '\n', function(err) {
+                if(err) throw err;
+                exec("python source" + idx + ".py < input" + idx + ".txt > result" + idx + ".txt 2> error" + idx + ".txt; (diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");", function(error, stdout, stderr){
+                    console.log(idx + "res : " + stdout + "|");
+                    console.log("python source" + idx + ".py < input" + idx + ".txt > result" + idx + ".txt 2> error" + idx + ".txt;"
+                        + "(printf %s \"$(echo -n $(cat result" + idx + ".txt))\" > result" + idx + ".txt); "
+                        + "(diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");");
+                    callback(idx, stdout.indexOf("PASS") != -1);
+                });
+            });
+        });
     });
     return true;
 }
