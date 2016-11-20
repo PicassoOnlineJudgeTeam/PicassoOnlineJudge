@@ -61,12 +61,15 @@ function submitInput(content){
 	// http://secr.tistory.com/255
 	$(sysin).val(content);
 	$(sysin).trigger(jQuery.Event( "keydown", { keyCode: 13 } ));
-	$(submit).click()	
+	//$(submit).click()	
 }
 
 var system = {
 	  in : function(idx){ return this.sysin[idx]}
-	, sysin : ["3", "1 2 3"]
+	, sysin : [
+		"4"
+		, "1 2 3 4"
+	]
 	, curser : 0
 	, next : function(){
 		let item = this.in(this.curser);
