@@ -29,9 +29,8 @@ class Solve extends Component {
     return (
       <article>
         <section className="text-section">
-          <h1>Solve</h1>
-          <textarea name="source" id="source" cols="105" rows="30">
-              {source}
+          <h1>Solve / {this.props.params.id}</h1>
+          <textarea name="source" id="source" cols="105" rows="30" defaultValue={source}>
           </textarea>
           <div style={{position:"relative", top:"10px", left:"680px"}}>
             <ModalForm/>

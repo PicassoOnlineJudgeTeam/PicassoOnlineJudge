@@ -12,6 +12,7 @@ class ModalForm extends Component {
   close = () => this.setState({ open: false })
   render() {
     const { open, closeOnEscape, closeOnDocumentClick } = this.state
+    let source = $('textarea#source').val();
     return (
       <div>
         <Button className="btn btn--modal" id="btn" onClick={this.closeConfigShow(true, false)}>Submit</Button>
@@ -30,21 +31,21 @@ class ModalForm extends Component {
             &nbsp; <b>Test Case #0 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
-              <Link to='/visualize' className="btn" negative>View</Link>
+            <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : 0}))} className="btn" negative>View</Link>
           </Modal.Actions>
           <Modal.Content>
             <Icon color='green' name='users' />
             &nbsp; <b>Test Case #1 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
-            <Link to='/visualize' className="btn" negative>View</Link>
+            <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : 1}))} className="btn" negative>View</Link>
           </Modal.Actions>
           <Modal.Content>
             <Icon color='green' name='users' />
             &nbsp; <b>Test Case #2 &nbsp; &nbsp; &nbsp; &nbsp; Pass</b>
           </Modal.Content>
           <Modal.Actions>
-            <Link to='/visualize' className="btn" negative>View</Link>
+            <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : 2}))} className="btn" negative>View</Link>
           </Modal.Actions>
           <Modal.Content>
             <Icon color='green' name='users' />
