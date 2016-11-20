@@ -44,11 +44,13 @@ export function homeReducer(state = initialState, action) {
         currentlySending: action.sending
       });
       break;
-      
+
     case REQ_QUESTIONS:
       return Object.assign({}, state, {
           value: action.value // ??
       });
+      break;
+
     default:
       return state;
   }

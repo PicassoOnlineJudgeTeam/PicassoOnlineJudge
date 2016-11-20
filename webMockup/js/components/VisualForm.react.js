@@ -24,8 +24,8 @@ class VisualFrame extends Iframe {
             width: this.props.width
         })
     }
-
 }
+
 class VisualForm extends Component {
 
   render() {

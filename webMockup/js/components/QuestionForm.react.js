@@ -36,31 +36,18 @@ class QuestionForm extends Component {
 
   componentDidMount() {
       let tryAjax = () => {
-          axios.get('/api/questions').then(response => {
-              //console.log(response.data);
-              //console.log(this.props);
-              //this.props.onReceive(response.data);
-              for (var v in response.data) {
+          var req = '/api/questions/' + this.props.id;
 
-                if(response.data[v].id === this.props.id){
-                    //console.log(response.data[v]);
-                    this.setState({value:response.data[v]});
-                }
-              }
-              //console.log(this.state.value);
-              //setTimeout(tryAjax, 1000 * 5); // REPEAT THIS EVERy 5 SECONDS
+          axios.get('/api/questions/' + this.props.id).then(response => {
+              this.setState({value:response.data})
           });
       }
-
       tryAjax();
-
   }
 
   render() {
       var sLink = "/solve/" + this.props.id;
-
       if (this.state && this.state.value){
-          //console.log(this.state.value);
           return (
               <article>
                 <section className="text-section">
@@ -132,7 +119,6 @@ class QuestionForm extends Component {
 
 class NewLineText extends Component {
     render () {
-        //console.log(this.props);
         var strArr = this.props.text.split("\n");
         var addPTag = strArr.map(function(value, i) {
             return <p key={i}>{value}</p>;
@@ -158,6 +144,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         }
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionForm);

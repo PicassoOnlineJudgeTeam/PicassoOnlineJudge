@@ -14,7 +14,7 @@ var app = new WebpackDevServer(webpack(config), { // Start a server
   headers: {"Access-Control-Allow-Origin": "*"},
   quiet: true // Without logging
 });
-app.use('/api/', appRouter)
+app.use('/api/', appRouter);
 app.listen(3000, '0.0.0.0', function (err, result) {
   if (err) {
     console.log(err);

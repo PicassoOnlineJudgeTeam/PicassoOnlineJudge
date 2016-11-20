@@ -20,11 +20,7 @@ class ListForm extends Component {
   componentDidMount() {
       let tryAjax = () => {
           axios.get('/api/questions').then(response => {
-              //console.log(response.data);
-              //this.props.onReceive(response.data);
               this.setState({value:response.data});
-              //console.log(this.state.value);
-              //setTimeout(tryAjax, 1000 * 5); // REPEAT THIS EVERy 5 SECONDS
           });
       }
 
@@ -33,7 +29,6 @@ class ListForm extends Component {
   }
 
   render() {
-    //console.log(this.state);
     if (this.state && this.state.value){
         var rtn = this.state.value.map(function(object, i){
             return <Row obj={object} key={i} />;

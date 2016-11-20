@@ -5,6 +5,17 @@ var mongoose = require('mongoose');
 // var expressJwt = require('express-jwt');
 
 var Questions = require('../models/question');
+var SolvedLog = require('../models/solvedLog');
+
+router.get(
+    '/questions/:qid',
+    function(req, res, next){
+        Questions.findOne({id: req.params.qid}, function(err, question){
+            if(err) {res.status(500).json({error: 'database failure'}); return;}
+            res.json(question);
+        });
+    }
+);
 
 router.get(
     '/questions',
@@ -12,17 +23,7 @@ router.get(
         Questions.find(function(err, questions){
             if(err) {res.status(500).json({error: 'database failure'}); return;}
             res.json(questions);
-        })
-    }
-);
-
-router.get(
-    '/questions/:id',
-    function(req, res, next){
-        Questions.find(function(err, questions){
-            if(err) {res.status(500).json({error: 'database failure'}); return;}
-            res.json(questions);
-        })
+        });
     }
 );
 
