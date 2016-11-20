@@ -103,10 +103,11 @@ function test(idx, source, sysin, sysout, callback){
             fs.writeFile('./output' + idx + '.txt', trim(sysout) + '\n', function(err) {
                 if(err) throw err;
                 exec("python source" + idx + ".py < input" + idx + ".txt > result" + idx + ".txt 2> error" + idx + ".txt; (diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");", function(error, stdout, stderr){
-                    console.log(idx + "res : " + stdout + "|");
-                    console.log("python source" + idx + ".py < input" + idx + ".txt > result" + idx + ".txt 2> error" + idx + ".txt;"
-                        + "(printf %s \"$(echo -n $(cat result" + idx + ".txt))\" > result" + idx + ".txt); "
-                        + "(diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");");
+                    // console.log(idx + "res : " + stdout + "|");
+                    // console.log("python source" + idx + ".py < input" + idx + ".txt > result" + idx + ".txt 2> error" + idx + ".txt;"
+                    //     + "(printf %s \"$(echo -n $(cat result" + idx + ".txt))\" > result" + idx + ".txt); "
+                    //     + "(diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");");
+
                     callback(idx, stdout.indexOf("PASS") != -1);
                 });
             });
