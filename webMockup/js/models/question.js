@@ -18,4 +18,4 @@ var questionSchema = new mongoose.Schema({
     testcase: Array
 });
 
-module.exports = mongoose.model('question', questionSchema);
+module.exports = mongoose.model('question', questionSchema, 'questions');
