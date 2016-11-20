@@ -63,12 +63,12 @@ class HomePage extends Component {
 						</ol>
 
 						<h2 id="-">다운로드</h2>
-						<pre class="editor-colors lang-text">
-						<div class="line">
-						<span class="text plain">
-						<span class="meta paragraph text">
+						<pre className="editor-colors lang-text">
+						<div className="line">
+						<span className="text plain">
+						<span className="meta paragraph text">
 						<span>git&nbsp;clone&nbsp;</span>
-						<span class="markup underline link https hyperlink">
+						<span className="markup underline link https hyperlink">
 						<span>https://github.com/PicassoOnlineJudgeTeam/PicassoOnlineJudge.git</span>
 						</span>
 						</span>
