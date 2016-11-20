@@ -5,4 +5,4 @@ js/bundle.min.js
 build
 npm-debug.log
 .idea
-vscode/lanch.json
+.vscode/launch.json
