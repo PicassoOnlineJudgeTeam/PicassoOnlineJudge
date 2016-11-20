@@ -64,7 +64,7 @@ class Row extends Component {
                 <td>{this.props.obj.questionID}</td>
                 <td>{this.props.obj.memberID}</td>
                 <td>{this.props.obj.size}</td>
-                <td>{this.props.obj.rusult}</td>
+                <td>{this.props.obj.result}</td>
                 <td>{this.props.obj.time}</td>
                 <td>{this.props.obj.submitTime}</td>
             </tr>

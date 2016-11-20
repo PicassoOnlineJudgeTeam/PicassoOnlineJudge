@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import SolvedLogForm from '../SolvedLogForm.react';
 import MyLogForm from '../MyLogForm.react';
 
+let localStorage = global.window.localStorage;
+
 let style = {
     table : {
     	"borderCollapse": "collapse",
@@ -35,6 +37,7 @@ let style = {
 
 class Dashboard extends Component {
   render() {
+      //console.log(localStorage.loggedInUser);
     return (
       <article>
         <section className="text-section">
@@ -53,7 +56,7 @@ class Dashboard extends Component {
                             <th style={{width:"150px"}}>제출시간</th>
                         </tr>
                     </thead>
-                    <MyLogForm user={this.props.data.formState.username} />
+                    <MyLogForm user={localStorage.loggedInUser} />
               </table>
           <h2>최근 활동 로그</h2>
               <table style={style.table}>

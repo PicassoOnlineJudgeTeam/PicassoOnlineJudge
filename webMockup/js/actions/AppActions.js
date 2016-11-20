@@ -29,6 +29,8 @@ import auth from '../utils/auth';
 import genSalt from '../utils/salt';
 import { browserHistory } from 'react-router';
 
+let localStorage = global.window.localStorage;
+
 /**
  * Logs an user in
  * @param  {string} username The username of the user to be logged in
@@ -65,11 +67,13 @@ export function login(username, password) {
         dispatch(setAuthState(success));
         if (success === true) {
           // If the login worked, forward the user to the dashboard and clear the form
+          localStorage.setItem('loggedInUser', username);
           forwardTo('/dashboard');
           dispatch(changeForm({
             username: username,
             password: ""
           }));
+
         } else {
           requestFailed(err);
         }
@@ -133,6 +137,7 @@ export function register(username, password) {
         dispatch(setAuthState(success));
         if (success) {
           // If the register worked, forward the user to the homepage and clear the form
+          localStorage.setItem('loggedInUser', username);
           forwardTo('/dashboard');
           dispatch(changeForm({
             username: "",
@@ -179,7 +184,7 @@ export function sendingRequest(sending) {
  * @param {string} location The route the user should be forwarded to
  */
 function forwardTo(location) {
-  console.log('forwardTo(' + location + ')');
+  //console.log('forwardTo(' + location + ')');
   browserHistory.push(location);
 }
 

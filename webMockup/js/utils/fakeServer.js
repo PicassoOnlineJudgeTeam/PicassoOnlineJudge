@@ -44,8 +44,9 @@ var server = {
     if (userExists && bcrypt.compareSync(password, users[username])) {
       if (callback) callback({
         authenticated: true,
-        token: Math.random().toString(36).substring(7)
+        token: Math.random().toString(36).substring(7),
       });
+
     } else {
       if (userExists) {
         // If the password is wrong, throw the password-wrong error
@@ -96,6 +97,7 @@ var server = {
    */
   logout(callback) {
     localStorage.removeItem('token');
+    localStorage.removeItem('loggedInUser');
     if (callback) callback();
   },
   /**
