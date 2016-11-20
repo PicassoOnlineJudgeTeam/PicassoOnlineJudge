@@ -32,8 +32,7 @@ router.get(
     function(req, res, next) {
         SolvedLogs.find(function(err, solvedLogs) {
             if(err) {res.status(500).json({error: 'database failure'}); return;}
-            console.log(solvedLogs);
-            console.log(router);
+            console.log("solvedLogs", solvedLogs, router, err);
             res.json(solvedLogs);
         });
     }

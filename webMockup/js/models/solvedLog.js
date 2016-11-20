@@ -11,4 +11,4 @@ var solvedLogSchema = new mongoose.Schema({
     submitTime: String
 });
 
-module.exports = mongoose.model('solvedLogs', solvedLogSchema);
+module.exports = mongoose.model('solvedLogs', solvedLogSchema, 'solvedLogs');
