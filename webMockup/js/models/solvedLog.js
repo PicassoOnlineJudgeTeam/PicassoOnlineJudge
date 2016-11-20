@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 
 var solvedLogSchema = new mongoose.Schema({
     questionID: String,
-    memverID: String,
+    memberID: String,
     size: String,
-    result: Number,
-    time: Number,
-    submitTime: String,
+    result: String,
+    time: String,
+    submitTime: String
 });
 
-module.exports = mongoose.model('solvedLog', solvedLogSchema);
+module.exports = mongoose.model('solvedLogs', solvedLogSchema);

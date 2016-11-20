@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import SolvedLogForm from '../SolvedLogForm.react';
 
 let style = {
     table : {
@@ -76,26 +77,7 @@ class Dashboard extends Component {
                             <th style={{width:"120px"}}>제출시간</th>
                         </tr>
                     </thead>
-                    <tbody style={style.td}>
-                        <tr>
-                            <td>000002 </td>
-                            <td>MERCY</td>
-                            <td>Lex2Star</td>
-                            <td>1.4KB</td>
-                            <td>정답</td>
-                            <td>13ms</td>
-                            <td>1분전</td>
-                        </tr>
-                        <tr>
-                            <td>000001 </td>
-                            <td>MERCY</td>
-                            <td>Picasso</td>
-                            <td>2.1KB</td>
-                            <td>정답</td>
-                            <td>123ms</td>
-                            <td>3분전</td>
-                        </tr>
-                    </tbody>
+                    <SolvedLogForm />
               </table>
         </section>
       </article>

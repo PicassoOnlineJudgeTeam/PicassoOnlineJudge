@@ -240,3 +240,13 @@ export function requestQuestions(value) {
   //console.log(obj);
   return obj;
 };
+
+import { REQ_SOLVEDLOG } from '../constants/AppConstants';
+export function requestSolvedLog(value) {
+  var obj = {
+      type: REQ_SOLVEDLOG,
+      value: value
+  };
+  //console.log(obj);
+  return obj;
+};
