@@ -20,7 +20,8 @@ class SolvedLogForm extends Component {
   componentDidMount() {
 
       let tryAjax = () => {
-          axios.get('/api/solvedLogs').then(response => {
+          var req = '/api/solvedLogs/' + this.props.user;
+          axios.get(req).then(response => {
               this.setState({value:response.data});
           });
       }

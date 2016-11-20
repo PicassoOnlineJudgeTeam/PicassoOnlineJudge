@@ -67,7 +67,7 @@ export function login(username, password) {
           // If the login worked, forward the user to the dashboard and clear the form
           forwardTo('/dashboard');
           dispatch(changeForm({
-            username: "",
+            username: username,
             password: ""
           }));
         } else {

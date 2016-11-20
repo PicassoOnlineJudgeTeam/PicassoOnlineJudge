@@ -38,7 +38,7 @@ class QuestionForm extends Component {
       let tryAjax = () => {
           var req = '/api/questions/' + this.props.id;
 
-          axios.get('/api/questions/' + this.props.id).then(response => {
+          axios.get(req).then(response => {
               this.setState({value:response.data})
           });
       }

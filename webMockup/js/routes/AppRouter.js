@@ -29,6 +29,16 @@ router.get(
 );
 
 router.get(
+    '/solvedLogs/:mid',
+    function(req, res, next) {
+        SolvedLogs.find({memberID: req.params.mid}, function(err, solvedLogs) {
+            if(err) {res.status(500).json({error: 'database failure'}); return;}
+            res.json(solvedLogs);
+        });
+    }
+);
+
+router.get(
     '/solvedLogs',
     function(req, res, next) {
         SolvedLogs.find(function(err, solvedLogs) {
