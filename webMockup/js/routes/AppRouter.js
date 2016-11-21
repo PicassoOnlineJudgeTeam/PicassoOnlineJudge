@@ -8,7 +8,6 @@ var fs = require('fs');
 
 var Questions = require('../models/question');
 var SolvedLogs = require('../models/solvedLog');
-
 router.get(
     '/questions/:qid',
     function(req, res, next){
@@ -50,25 +49,6 @@ router.get(
     }
 );
 
-router.post(
-    '/addLog',
-    function(req, res, next) {
-        var log = new SolvedLogs({
-            'questionID': req.body.questionID,
-            'memberID': req.body.memberID,
-            'size': req.body.size,
-            'result': req.body.result,
-            'time': req.body.time,
-            'submitTime': req.body.submitTime
-        });
-
-        log.save(function(err){
-            if(err) {res.status(500).json({result:0}); return;}
-            res.json({result:1});
-        })
-    }
-)
-
 router.get(
     '/testWithSource/:obj',
     function(req, res, next) {
@@ -79,13 +59,13 @@ router.get(
             for (var i = 0; i < question.testcase.length; i++) {
                 sysin = question.testcase[i].input;
                 sysout = question.testcase[i].output;
-                test(i, obj.code, sysin, sysout, (idx, flag)=>{
+                test(i, obj.code, sysin, sysout, (function(idx, flag){
                     arr[idx] = flag;
                     //undefind 제외한 갯수와 비교
                     if (arr.filter(function(val){return val != undefined }).length == question.testcase.length){
                         res.json(arr);
                     }
-                });
+                }));
             }
         });
     }
@@ -115,5 +95,25 @@ function test(idx, source, sysin, sysout, callback){
     });
     return true;
 }
+router.post(
+    '/addLog',
+    function(req, res, next) {
+        console.log("----");
+        console.log(req.body);
+        var log = new SolvedLogs({
+            'questionID': req.body.questionID,
+            'memberID': req.body.memberID,
+            'size': req.body.size,
+            'result': req.body.result,
+            'time': req.body.time,
+            'submitTime': req.body.submitTime
+        });
+
+        log.save(function(err){
+            if(err) {res.status(500).json({result:0}); return;}
+            res.json({result:1});
+        })
+    }
+);
 
 module.exports = router;

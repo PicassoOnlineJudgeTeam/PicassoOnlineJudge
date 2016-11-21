@@ -1,6 +1,7 @@
 // Gets called when running npm start
 
 var webpack = require('webpack');
+var bodyParser = require('webpack-body-parser');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.dev.config');
 
@@ -14,6 +15,8 @@ var app = new WebpackDevServer(webpack(config), { // Start a server
   headers: {"Access-Control-Allow-Origin": "*"},
   quiet: true // Without logging
 });
+// http://mydreamisthebestcooder.tistory.com/6
+app.use(bodyParser.json());
 app.use('/api/', appRouter);
 app.listen(3000, '0.0.0.0', function (err, result) {
   if (err) {

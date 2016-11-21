@@ -15,7 +15,8 @@
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.0",
     "semantic-ui-css": "^2.2.4",
-    "semantic-ui-react": "^0.54.5"
+    "semantic-ui-react": "^0.54.5",
+    "webpack-body-parser": "^1.11.110"
   },
   "devDependencies": {
     "appcache-webpack-plugin": "^1.2.0",

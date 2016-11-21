@@ -4,21 +4,22 @@ import { Link } from 'react-router';
 
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import querystring from 'querystring';
 class ModalForm extends Component {
   state = { open: false }
 
   closeConfigShow = (closeOnEscape, closeOnDocumentClick) => () => {
     this.setState({ closeOnEscape, closeOnDocumentClick, open: true });
+
     let tryAjax = () => {
       axios.get('/api/testWithSource/' + encodeURIComponent(JSON.stringify({code : $('textarea#source').val(), qid: this.props.qid}))).then(response => {
         this.setState({compileResult : response.data});
       });
     }
     tryAjax();
-
+    
     let tryAjax2 = () => {
-        axios.post('/api/addLog', {
+        axios.post('/api/addLog/', {
             questionID: this.props.qid,
             memberID: this.props.user,
             size:"1.3kb",
