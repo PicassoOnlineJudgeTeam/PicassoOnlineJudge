@@ -17,17 +17,17 @@ class Nav extends Component {
     // based on the current authentication state.
     const navButtons = this.props.loggedIn ? (
         <div>
-          <Link to="/dashboard" className="btn btn--dash btn--nav">Dashboard</Link>
+          <Link to="/dashboard" className="btn btn--dash btn--nav">대시보드</Link>
           {this.props.currentlySending ? (
             <LoadingButton className="btn--nav" />
           ) : (
-            <a href="#" className="btn btn--login btn--nav" onClick={::this._logout}>Logout</a>
+            <a href="#" className="btn btn--login btn--nav" onClick={::this._logout}>로그아웃</a>
           )}
         </div>
       ) : (
         <div>
-          <Link to="/register" className="btn btn--login btn--nav">Register</Link>
-          <Link to="/login" className="btn btn--login btn--nav">Login</Link>
+          <Link to="/register" className="btn btn--login btn--nav">회원가입</Link>
+          <Link to="/login" className="btn btn--login btn--nav">로그인</Link>
         </div>
       );
 

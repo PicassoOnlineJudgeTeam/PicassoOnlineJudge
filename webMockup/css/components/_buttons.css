@@ -2,8 +2,8 @@
 
 .btn {
   padding: 0.5em 1.5em;
-  color: $brand-color;
-  border: 1px solid $brand-color;
+  color: $button-text-color;
+  border: 1px solid $button-text-color;
   border-radius: 3px;
   text-decoration: none;
   user-select: none;
@@ -11,8 +11,8 @@
 }
 
 .btn:hover {
-  color: white;
-  background-color: $brand-color;
+  color: $button-text-color;
+  background-color: #EEE;
 }
 
 .btn + .btn {
@@ -21,14 +21,14 @@
 
 .btn--loading {
   color: white;
-  background-color: $brand-color;
+  background-color: $button-color;
 }
 
 #btn {
     padding: 0.5em 1.5em;
     background-color: white;
-    color: $brand-color;
-    border: 1px solid $brand-color;
+    color: $button-text-color;
+    border: 1px solid $button-text-color;
     border-radius: 3px;
     text-decoration: none;
     user-select: none;

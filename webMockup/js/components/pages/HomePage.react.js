@@ -22,29 +22,31 @@ class HomePage extends Component {
 					<section className="text-section">
 						{/* Change the copy based on the authentication status */}
 						{loggedIn ? (
-							<h1>Picasso Online Judge. Logged in!!!</h1>
+							<h1 id="loging_status">Status : Logged in</h1>
 						) : (
 							<div>
-								<h1>Picasso Online Judge. Not logged in</h1>
+								<h1 id="loging_status">Status : Not logged in</h1>
 								<p>ID : picasso / PW : 109</p>
 							</div>
 						)}
 						{loggedIn ? (
-							<Link to="/dashboard" className="btn btn--dash">Dashboard</Link>
+							<Link to="/dashboard" className="btn btn--dash">대시보드</Link>
+
 						) : (
 							<div>
-								<Link to="/login" className="btn btn--login">Login</Link>
-								<Link to="/register" className="btn btn--register">Register</Link>
+								<Link to="/login" className="btn btn--login">로그인</Link>
+								<Link to="/register" className="btn btn--register">회원가입</Link>
 							</div>
+
 						)}
 						<br/>
 						<br/>
 						<p>제주대학교 컴퓨터교육과 2016-2 협동프로젝트 Picasso (고원지, 이현기)의 산출물입니다.</p>
-						<h2 id="-">소개</h2>
+						<h1 id="-">소개</h1>
 
 						<p>본 프로젝트는 소스코드를 통해 알고리즘을 추상적으로 이해하는데 어려움을 겪는 학습자를 위하여, 소스코드 작성과 그 결과를 보여주는 온라인 코딩 대회 시스템을 구현한다. 기존의 온라인 코딩 대회 시스템에서는, 문제에 대해 이 소스코드가 성공/실패인지만을 확인하기 때문에 자기가 작성하거나 다른 사람이 작성한 소스코드를 디버깅하기 위해선 전체 소스코드를 읽어 이해하여야 했다. 프로그래밍에 익숙한 사람이라면, 이것이 매우 익숙하겠지만 초심자에게는 이와 같은 과정이 어려움을 겪기 때문에, 소스코드를 이해하는데 도움이 되는 시각화 자료를 같이 볼 수 있게 하는 시스템을 구현하려 한다.</p>
 
-						<h2 id="-">사용법</h2>
+						<h1 id="-">사용법</h1>
 						<ol>
 						<li><p>사용자 등록 후 로그인을 한다.</p>
 						</li>

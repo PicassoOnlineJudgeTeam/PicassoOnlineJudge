@@ -26,11 +26,11 @@ body {
 }
 
 body {
-	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-family: $text-font-stack;
   padding-top: $nav-height;
   background-color: $background-color;
 }
 
 body.js-open-sans-loaded {
-	font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-family: 'Open Sans', 'Nanum Gothic', Helvetica Neue, Helvetica, Arial, sans-serif;
 }
