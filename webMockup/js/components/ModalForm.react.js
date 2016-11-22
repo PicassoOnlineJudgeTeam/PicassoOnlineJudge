@@ -61,22 +61,47 @@ class ModalForm extends Component {
   render() {
     const { open, closeOnEscape, closeOnDocumentClick, compileResult} = this.state
     let source = $('textarea#source').val();
+    let result = {
+        total:true,
+        true:0,
+        false:0
+    }
     let cases = [];
     if (compileResult){
       $(compileResult).each(function(idx, val){
-        cases.push(
-          <Modal.Content>
-            <Icon color='green' name='users' />
-            &nbsp; <b>Test Case #{idx} &nbsp; &nbsp; &nbsp; &nbsp; {val ? "PASS" : "FAIL"}</b>
-          </Modal.Content>
-          );
-        cases.push(
-          <Modal.Actions>
-            <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : idx}))} className="btn" negative>View</Link>
-          </Modal.Actions>
-        );
+        if (result.total) {
+            result.total = val ? true : false;
+        }
+        if (val) {
+            result.true += 1;
+            cases.push(
+              <Modal.Content>
+                <Icon color='green' name='users' />
+                &nbsp; <b>Test Case #{idx} &nbsp; &nbsp; &nbsp; &nbsp;PASS</b>
+              </Modal.Content>
+              );
+            cases.push(
+              <Modal.Actions>
+                <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : idx}))} className="btn" negative>View</Link>
+              </Modal.Actions>
+            );
+        } else {
+            result.false += 1;
+            cases.push(
+              <Modal.Content>
+                <Icon color='red' name='users' />
+                &nbsp; <b>Test Case #{idx} &nbsp; &nbsp; &nbsp; &nbsp;FAIL</b>
+              </Modal.Content>
+              );
+            cases.push(
+              <Modal.Actions>
+                <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : idx}))} className="btn" negative>View</Link>
+              </Modal.Actions>
+            );
+        }
       });
     }
+    console.log(result);
 
     return (
       <div>
@@ -89,14 +114,23 @@ class ModalForm extends Component {
           onClose={this.close}
         >
           <Modal.Header>
-            Congrats, you solved this challenge!
+            {result.total ? (<p>Congrats, you solved this challenge!</p>) : (<p style={{color:"red"}}>Wrong Answer</p>)}
           </Modal.Header>
 
           {cases}
 
           <Modal.Content>
-            <Icon color='green' name='users' />
-            &nbsp; <b>All Pass</b>
+            {result.total ? (
+                <div>
+                    <Icon color='green' name='users' />
+                    &nbsp; <b>All Pass</b>
+                </div>
+            ) : (
+                <div>
+                    <Icon color='red' name='users' />
+                    &nbsp; <b>{result.true} Pass, {result.false} Fail</b>
+                </div>
+            )}
           </Modal.Content>
           <Modal.Actions>
             <Link to="/dashboard" className="btn" negative>Return</Link>
