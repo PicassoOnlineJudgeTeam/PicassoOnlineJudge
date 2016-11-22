@@ -5,6 +5,18 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import querystring from 'querystring';
+
+function leadingZeros(n, digits) {
+  var zero = '';
+  n = n.toString();
+
+  if (n.length < digits) {
+    for (var i = 0; i < digits - n.length; i++)
+      zero += '0';
+  }
+  return zero + n;
+}
+
 class ModalForm extends Component {
   state = { open: false }
 
@@ -12,10 +24,14 @@ class ModalForm extends Component {
     this.setState({ closeOnEscape, closeOnDocumentClick, open: true });
 
     let tryAjax2 = () => {
-        console.log('in ajax2');
-
         var result = this.state.compileResult.indexOf(false) === -1 ? "PASS" : "FAIL";
-        console.log(result);
+        var d = new Date();
+        var submitTime = leadingZeros(d.getFullYear(), 4) + '-' +
+                        leadingZeros(d.getMonth() + 1, 2) + '-' +
+                        leadingZeros(d.getDate(), 2) + ' ' +
+                        leadingZeros(d.getHours(), 2) + ':' +
+                        leadingZeros(d.getMinutes(), 2);
+        console.log(submitTime);
 
         axios.post('/api/addLog/', {
             questionID: this.props.qid,
@@ -23,7 +39,7 @@ class ModalForm extends Component {
             size:"1.3kb",
             result : result,
             time : "200ms",
-            submitTime : "2016-11-20 20:49"
+            submitTime : submitTime
         }).then( response => {
             console.log(response);
         });
