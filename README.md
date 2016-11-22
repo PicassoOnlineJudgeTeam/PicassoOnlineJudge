@@ -41,7 +41,7 @@ Python, Bottle 서버 프레임워크 필요함
 
     cd visualizer/v3
     pip install bottle
-    python bootle_server.py
+    python bottle_server.py
 http://localhost:8003/index.html 에서 확인.
 
 온라인 서버 : http://203.253.198.201:8003/index.html
