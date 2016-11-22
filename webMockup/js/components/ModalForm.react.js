@@ -11,27 +11,34 @@ class ModalForm extends Component {
   closeConfigShow = (closeOnEscape, closeOnDocumentClick) => () => {
     this.setState({ closeOnEscape, closeOnDocumentClick, open: true });
 
-    let tryAjax = () => {
-      axios.get('/api/testWithSource/' + encodeURIComponent(JSON.stringify({code : $('textarea#source').val(), qid: this.props.qid}))).then(response => {
-        this.setState({compileResult : response.data});
-      });
-    }
-    tryAjax();
-    
     let tryAjax2 = () => {
+        console.log('in ajax2');
+
+        var result = this.state.compileResult.indexOf(false) === -1 ? "PASS" : "FAIL";
+        console.log(result);
+
         axios.post('/api/addLog/', {
             questionID: this.props.qid,
             memberID: this.props.user,
             size:"1.3kb",
-            result : "pass",
+            result : result,
             time : "200ms",
             submitTime : "2016-11-20 20:49"
         }).then( response => {
             console.log(response);
         });
     }
-    tryAjax2();
-  }
+
+    let tryAjax = () => {
+      axios.get('/api/testWithSource/' + encodeURIComponent(JSON.stringify({code : $('textarea#source').val(), qid: this.props.qid}))).then(response => {
+        this.setState({compileResult : response.data});
+        console.log(this.state);
+        tryAjax2();
+      });
+    }
+
+    tryAjax();
+ }
 
   close = () => this.setState({ open: false })
 
