@@ -47,6 +47,7 @@ function innerFrameArrange(){
 			return;
 		parentFrame.append(aFrame.remove());
 	});
+	myVisualizer.redrawConnectors();
 }
 $(document).ready(function(){
 	var iInterval = setInterval(function(){innerFrameArrange()}, 100);
