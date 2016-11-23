@@ -81,7 +81,7 @@ class ModalForm extends Component {
 
         cases.push(
           <Modal.Content key={idx + "_TF"}>
-            <Icon color='green' name='users' />
+            <Icon color={val.flag ? 'green' : 'red'} name='users' />
             &nbsp; <b>Test Case #{idx} &nbsp; &nbsp; &nbsp; &nbsp;{val.flag ? "PASS" : "FAIL"}</b>
           </Modal.Content>
         );
