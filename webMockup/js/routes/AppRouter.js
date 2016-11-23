@@ -59,8 +59,8 @@ router.get(
             for (var i = 0; i < question.testcase.length; i++) {
                 sysin = question.testcase[i].input;
                 sysout = question.testcase[i].output;
-                test(i, obj.code, sysin, sysout, (function(idx, flag){
-                    arr[idx] = flag;
+                test(i, obj.code, sysin, sysout, (function(idx, executionResult){
+                    arr[idx] = executionResult;
                     //undefind 제외한 갯수와 비교
                     if (arr.filter(function(val){return val != undefined }).length == question.testcase.length){
                         res.json(arr);
@@ -77,6 +77,7 @@ function trim(str) {
 
 function test(idx, source, sysin, sysout, callback){
     var testDir = './compile';
+    var sysin = sysin;
     fs.writeFile(testDir + '/source' + idx + '.py', trim(source), function(err) {
         if(err) throw err;
         fs.writeFile(testDir + '/input' + idx + '.txt', trim(sysin) + '\n', function(err) {
@@ -89,7 +90,7 @@ function test(idx, source, sysin, sysout, callback){
                     //     + "(printf %s \"$(echo -n $(cat result" + idx + ".txt))\" > result" + idx + ".txt); "
                     //     + "(diff result" + idx + ".txt output" + idx + ".txt > tmp" + idx + " && (echo PASS && rm tmp" + idx + ") ) || (echo FAIL && rm tmp" + idx + ");");
 
-                    callback(idx, stdout.indexOf("PASS") != -1);
+                    callback(idx, {flag : stdout.indexOf("PASS") != -1, case : sysin});
                 });
             });
         });

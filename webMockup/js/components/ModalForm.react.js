@@ -60,6 +60,7 @@ class ModalForm extends Component {
 
   render() {
     const { open, closeOnEscape, closeOnDocumentClick, compileResult} = this.state
+    let qid = this.props.qid;
     let source = $('textarea#source').val();
     let result = {
         total:true,
@@ -70,35 +71,25 @@ class ModalForm extends Component {
     if (compileResult){
       $(compileResult).each(function(idx, val){
         if (result.total) {
-            result.total = val ? true : false;
+            result.total = val.flag ? true : false;
         }
-        if (val) {
+        if (val.flag) {
             result.true += 1;
-            cases.push(
-              <Modal.Content>
-                <Icon color='green' name='users' />
-                &nbsp; <b>Test Case #{idx} &nbsp; &nbsp; &nbsp; &nbsp;PASS</b>
-              </Modal.Content>
-              );
-            cases.push(
-              <Modal.Actions>
-                <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : idx}))} className="btn" negative>View</Link>
-              </Modal.Actions>
-            );
         } else {
-            result.false += 1;
-            cases.push(
-              <Modal.Content>
-                <Icon color='red' name='users' />
-                &nbsp; <b>Test Case #{idx} &nbsp; &nbsp; &nbsp; &nbsp;FAIL</b>
-              </Modal.Content>
-              );
-            cases.push(
-              <Modal.Actions>
-                <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({source : source, idx : idx}))} className="btn" negative>View</Link>
-              </Modal.Actions>
-            );
+          result.false += 1;
         }
+
+        cases.push(
+          <Modal.Content key={idx + "_TF"}>
+            <Icon color={val.flag ? 'green' : 'red'} name='users' />
+            &nbsp; <b>Test Case #{idx} &nbsp; &nbsp; &nbsp; &nbsp;{val.flag ? "PASS" : "FAIL"}</b>
+          </Modal.Content>
+        );
+        cases.push(
+          <Modal.Actions key={idx + "_LINK"}>
+            <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({questionId:qid, source : source, idx : idx, case : val.case}))} className="btn" negative>View</Link>
+          </Modal.Actions>
+        );
       });
     }
     console.log(result);

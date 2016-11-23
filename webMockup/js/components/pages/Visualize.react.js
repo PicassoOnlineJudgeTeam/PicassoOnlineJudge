@@ -23,15 +23,16 @@ let style = {
 
 class Visualize extends Component {
   render() {
+    let result = JSON.parse(decodeURIComponent(this.props.params.executionResult));
     return (
         <article>
           <section className="text-section">
             <h1>Visualize</h1>
             <div style={{position:"relative", top:"-45px", left:"680px"}}>
-                <Link to="/solve" className="btn btn--solve">Solve</Link>
+                <Link to={"/solve/" + result.questionId} className="btn btn--solve">Solve</Link>
             </div>
             <div>
-                <VisualForm source={this.props.params.source}/>
+                <VisualForm source={result}/>
             </div>
           </section>
         </article>
