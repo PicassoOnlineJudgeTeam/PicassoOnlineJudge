@@ -35,7 +35,11 @@ class Solve extends Component {
           <textarea name="source" id="source" cols="105" rows="30" defaultValue={source}>
           </textarea>
           <div style={{position:"relative", top:"10px", left:"680px"}}>
-            <ModalForm qid={this.props.params.id} user={localStorage.loggedInUser}/>
+            {this.props.params.id ?
+              (<ModalForm qid={this.props.params.id} user={localStorage.loggedInUser}/>)
+              :
+              (<Link to={'/visualize/' + encodeURIComponent(JSON.stringify({questionId: "", source : source, idx : -1, case : ""}))} className="btn" negative>Visulize</Link>)
+              }
           </div>
         </section>
       </article>

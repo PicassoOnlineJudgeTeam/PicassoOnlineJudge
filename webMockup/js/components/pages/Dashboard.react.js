@@ -43,6 +43,7 @@ class Dashboard extends Component {
         <section className="text-section">
           <h1>Dashboard</h1>
           <Link to="/list" className="btn btn--list">List</Link>
+          <Link to="/Solve" className="btn btn--list">Solve</Link>
           <h2>나의 활동 로그</h2>
               <table style={style.table}>
                     <thead style={style.thead}>
