@@ -31,7 +31,7 @@ class Visualize extends Component {
                 <Link to="/solve" className="btn btn--solve">Solve</Link>
             </div>
             <div>
-                <VisualForm source={this.props.params.source}/>
+                <VisualForm source={this.props.params.executionResult}/>
             </div>
           </section>
         </article>

@@ -115,7 +115,7 @@ ReactDOM.render(
           <Route path="/solve" component={Solve} />
           <Route path="/solve/:id" component={Solve} />
           <Route path="/visualize" component={Visualize} />
-          <Route path="/visualize/:source" component={Visualize} />
+          <Route path="/visualize/:executionResult" component={Visualize} />
         </Route>
         <Route path="*" component={NotFound} />
       </Route>
