@@ -24,17 +24,6 @@ class VisualFrame extends Iframe {
 					width: this.props.width
 			})
 	}
-	componentDidMount(){
-		let sysin = this.props.input;
-		$('#visualFrame').ready(function(){
-			let intv = setInterval(function(){
-				if ($('#visualFrame').get(0) && $('#visualFrame').get(0).contentWindow && $('#visualFrame').get(0).contentWindow.setInputCase){
-					$('#visualFrame').get(0).contentWindow.setInputCase(sysin);
-					clearInterval(intv);
-				}
-			}, 200);
-		});
-	}
 }
 
 class VisualForm extends Component {
