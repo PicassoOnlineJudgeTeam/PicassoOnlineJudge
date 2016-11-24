@@ -59,7 +59,7 @@ function setInputCase(sysin){
 	system.sysin = sysin.split('\n');
 	system.curser = 0;
 	// may cause bug;
-	onInputRequired.detectedLine = [];
+	onInputRequired.detectedInstr = [];
 }
 function submitInput(content){
 	let $v = myVisualizer.domRoot
@@ -90,12 +90,12 @@ var onInputRequired = function(curLineNumber){
 	//console.log(curLineNumber, "onInputRequired", content);
 	submitInput(content);
 }
-onInputRequired.detectedLine = [];
+onInputRequired.detectedInstr = [];
 onInputRequired.detectinputRequireEventThread = setInterval(
 	function(){
-		if (isInputRequired(myVisualizer.domRoot) && !onInputRequired.detectedLine.includes(myVisualizer.curLineNumber)){
-			onInputRequired.detectedLine.push(myVisualizer.curLineNumber);
-			onInputRequired(myVisualizer.curLineNumber);
+		if (isInputRequired(myVisualizer.domRoot) && !onInputRequired.detectedInstr.includes(myVisualizer.curInstr)){
+			onInputRequired.detectedInstr.push(myVisualizer.curInstr);
+			onInputRequired(myVisualizer.curInstr);
 		}
 	}
 	, 100);
@@ -104,6 +104,50 @@ function isInputRequired($){
 		return $.find('#curInstr').text() == "유저 입력을 입력하십시오 : ";
 	return myVisualizer.domRoot.find('#curInstr').text() == "유저 입력을 입력하십시오 : ";
 }
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	let qid = $.getUrlVar("qid")
+	let idx = $.getUrlVar("idx")
+	if (!qid || !idx)
+		return;
+
+	var URL = "http://" + location.hostname + ":3300/api/questions";
+	$.ajax({
+		url : URL
+		, settings : {cathe:false}
+		, dataType : "jsonp"
+		, jsonp : "callback"
+	})
+	.done(function(data){
+		window.data = eval(data);
+		console.log("request ajax done.", data);
+		var aQuestion = undefined;
+		$(data).each(function(idx,val){
+			if (val.id == qid)
+				aQuestion = val;
+		});
+		if (!aQuestion)
+			return;
+		setInputCase(aQuestion.testcase[idx].input);
+	});
+});
+
+$.extend({
+    getUrlVars: function(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    },
+    getUrlVar: function(name) {
+        return $.getUrlVars()[name];
+    }
+});
 </script>
 </head>
 

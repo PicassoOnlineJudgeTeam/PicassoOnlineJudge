@@ -78,7 +78,8 @@ function checkAuth(nextState, replaceState) {
   // check if the path isn't dashboard
   // that way we can apply specific logic
   // to display/render the path we want to
-  if (nextState.location.pathname !== '/dashboard') {
+  if (nextState.location.pathname !== '/dashboard'
+    && nextState.location.pathname.indexOf("api") != -1) {
     if (loggedIn) {
       if (nextState.location.state && nextState.location.pathname) {
         replaceState(null, nextState.location.pathname);

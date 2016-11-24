@@ -50,8 +50,8 @@ class VisualForm extends Component {
 	}
 	render() {
 		let source = this.props.source;
-		var url = "http://" + getIp() + ":8003" + genEmbedUrlStr(source.source);
-		//console.log(url);
+		var url = "http://" + getIp() + ":8003" + genEmbedUrlStr(source.source, source.questionId, source.idx);
+		console.log(url);
 		//var url = "http://"+ getIp() +":8003/iframe-embed.html#code=a_var+%3D+'global+value'%0Adef+outer(%29%3A%0A++a_var+%3D+'enclosed+value'%0A%0A++def+inner(%29%3A%0A++++a_var+%3D+'local+value'%0A++++print(a_var%29%0A++++def+inner2(%29%3A%0A++++++++a_var+%3D+'local+value2'%0A++++++++print(a_var%29%0A++++inner2(%29%0A++inner(%29%0A%0Aouter(%29&mode=display&origin=&cumulative=false&heapPrimitives=&textReferences=&py=2&rawInputLstJSON=%5B%5D&curInstr=0";
 		return (
 				<VisualFrame url={url} input={source.case} id={'visualFrame'} />
@@ -61,7 +61,7 @@ class VisualForm extends Component {
 
 
 // visualizer를 위한 state를 만드는 함수
-function genEmbedUrlStr(source){
+function genEmbedUrlStr(source, questionId, idx){
 	// visualizer를 위한 state를 만드는 함수 (genEmbedUrlStr)
 	let getAppState = function(txt) {
 		var ret = {code: txt,
@@ -73,7 +73,9 @@ function genEmbedUrlStr(source){
 				py: '2', //$('#pythonVersionSelector').val(),
 				/* ALWAYS JSON serialize rawInputLst, even if it's empty! */
 				rawInputLstJSON: '[]', //JSON.stringify(rawInputLst),
-				curInstr: 0//myVisualizer ? myVisualizer.curInstr : undefined
+				curInstr: 0,//myVisualizer ? myVisualizer.curInstr : undefined
+				qid : questionId,
+				idx : idx
 			};
 
 		// keep this really clean by avoiding undefined values
