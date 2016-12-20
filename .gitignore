@@ -2,3 +2,5 @@
 server/.vscode/launch.json
 
 *.pyc
+
+*.pyc

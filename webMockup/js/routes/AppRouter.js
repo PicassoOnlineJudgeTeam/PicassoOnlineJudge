@@ -32,7 +32,7 @@ router.get(
 router.get(
     '/solvedLogs/:mid',
     function(req, res, next) {
-        SolvedLogs.find({memberID: req.params.mid}, function(err, solvedLogs) {
+        SolvedLogs.find({memberID: req.params.mid}).sort({submitTime:-1}).all(function(err, solvedLogs) {
             if(err) {res.status(500).json({error: 'database failure'}); return;}
             res.json(solvedLogs);
         });
