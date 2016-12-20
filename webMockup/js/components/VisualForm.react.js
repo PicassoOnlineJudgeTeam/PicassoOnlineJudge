@@ -17,7 +17,7 @@ class VisualFrame extends Iframe {
 					src: this.props.url,
 					style: {
 							position: this.props.position,
-							height: this.props.height,
+							height: "550px",
 							width: this.props.width
 					},
 					height: this.props.height,
