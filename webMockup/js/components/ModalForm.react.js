@@ -87,7 +87,7 @@ class ModalForm extends Component {
         );
         cases.push(
           <Modal.Actions key={idx + "_LINK"}>
-            <Link target="_blank" to={'/visualize/' + encodeURIComponent(JSON.stringify({questionId:qid, source : source, idx : idx, case : val.case}))} className="btn" negative>View</Link>
+            <Link to={'/visualize/' + encodeURIComponent(JSON.stringify({questionId:qid, source : source, idx : idx, case : val.case}))} className="btn" negative>View</Link>
           </Modal.Actions>
         );
       });

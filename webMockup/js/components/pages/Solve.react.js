@@ -31,7 +31,8 @@ class Solve extends Component {
               {this.props.params.id ?
                 (<ModalForm qid={this.props.params.id} user={localStorage.loggedInUser}/>)
                 :
-                (<Button className="btn btn--modal" id="btn" onClick={function(){window.open('/visualize/' + encodeURIComponent(JSON.stringify({questionId: "", source : $('[name=source]').val(), idx : -1, case : ""})), "_blank")}}>Visulize</Button>)
+                (<Link to={'/visualize/' + encodeURIComponent(JSON.stringify({questionId: "", source : source, idx : -1, case : ""}))} className="btn" negative >Visulize</Link>)
+                /*(<Button className="btn btn--modal" id="btn" onClick={function(){window.open('/visualize/' + encodeURIComponent(JSON.stringify({questionId: "", source : $('[name=source]').val(), idx : -1, case : ""})), "_blank")}}>Visulize</Button>)*/
               }
             </div>
           </section>
