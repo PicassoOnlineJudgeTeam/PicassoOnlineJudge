@@ -179,7 +179,7 @@
 		return $('#vizDiv').text().indexOf("SyntaxError") != -1;
 	}
 	function isRuntimeError(){
-		return $('#errorOutput').html().length > 4 && $('#errorOutput').html().indexOf("런타임") == -1;
+		return $('#errorOutput').html() && $('#errorOutput').html().length > 4 && $('#errorOutput').html().indexOf("런타임") == -1;
 	}
 	function setContent(str){
 		$('#vizDiv').text(str);
