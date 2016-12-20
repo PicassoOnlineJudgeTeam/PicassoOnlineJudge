@@ -23,6 +23,7 @@ let style = {
 
 class Visualize extends Component {
   render() {
+    debugger;
     let result = JSON.parse(decodeURIComponent(this.props.params.executionResult));
     return (
         <article>

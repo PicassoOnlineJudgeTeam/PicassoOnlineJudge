@@ -47,9 +47,6 @@ openSansObserver.check().then(() => {
 }, (err) => {
   document.body.classList.remove('js-open-sans-loaded');
 });
-//
-//var Questions = require('./models/question');
-//import Question2 from './models/question';
 
 // Import the components used as pages
 import HomePage from './components/pages/HomePage.react';
@@ -74,7 +71,6 @@ const store = createStoreWithMiddleware(homeReducer);
 
 function checkAuth(nextState, replaceState) {
   let { loggedIn } = store.getState();
-
   // check if the path isn't dashboard
   // that way we can apply specific logic
   // to display/render the path we want to
@@ -100,6 +96,11 @@ function checkAuth(nextState, replaceState) {
 
 // Mostly boilerplate, except for the Routes. These are the pages you can go to,
 // which are all wrapped in the App component, which contains the navigation etc
+console.log("-------")
+console.log(store)
+console.log(browserHistory)
+console.log(App)
+console.log("#######")
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -114,10 +115,9 @@ ReactDOM.render(
           <Route path="/question/:id" component={Question} />
           <Route path="/solve" component={Solve} />
           <Route path="/solve/:id" component={Solve} />
-          <Route path="/visualize" component={Visualize} />
-          <Route path="/visualize/:executionResult" component={Visualize} />
         </Route>
-        <Route path="*" component={NotFound} />
+        <Route path="/visualize/:executionResult" component={Visualize} />
+        <Route path="/visualize" component={Visualize} />
       </Route>
     </Router>
   </Provider>,

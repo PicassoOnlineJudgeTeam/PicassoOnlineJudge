@@ -7,6 +7,7 @@ module.exports = function(options) {
   var entry, jsLoaders, plugins, cssLoaders, devtool;
 
   // If production is true
+  //if (options.prod) {
   if (options.prod) {
     // Entry
     entry = [

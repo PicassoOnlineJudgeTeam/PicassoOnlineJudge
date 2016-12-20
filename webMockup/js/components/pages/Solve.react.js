@@ -18,18 +18,7 @@ class Solve extends Component {
     render() {
       var source = $('textarea#source').val();
       if (!source)
-        source = ""
-          + "# use list\n"
-          + "x = None\n"
-          + "for i in range(6, 0, -1):\n"
-          + "    x = [i, x]\n"
-          + "\n"
-          + "# use tuples\n"
-          + "y = None\n"
-          + "for i in range(6, 0, -1):\n"
-          + "    y = (i, y)\n"
-          + "\n"
-          + "x[1][0]=y[1][1]\n";
+        source = ""; // init source
       return (
         <article>
           <section className="text-section">
@@ -40,7 +29,7 @@ class Solve extends Component {
               {this.props.params.id ?
                 (<ModalForm qid={this.props.params.id} user={localStorage.loggedInUser}/>)
                 :
-                (<Link to={'/visualize/' + encodeURIComponent(JSON.stringify({questionId: "", source : source, idx : -1, case : ""}))} className="btn" negative>Visulize</Link>)
+                (<Link target="_blank" to={'/visualize/' + encodeURIComponent(JSON.stringify({questionId: "", source : source, idx : -1, case : ""}))} className="btn" negative >Visulize</Link>)
                 }
             </div>
           </section>

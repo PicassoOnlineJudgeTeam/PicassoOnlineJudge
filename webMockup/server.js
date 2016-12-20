@@ -6,14 +6,13 @@ var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.dev.config');
 
 var appRouter = require('./js/routes/AppRouter');
-
 var app = new WebpackDevServer(webpack(config), { // Start a server
   publicPath: config.output.publicPath,
   hot: true, // With hot reloading
   inline: false,
   historyApiFallback: true,
   headers: {"Access-Control-Allow-Origin": "*"},
-  quiet: true // Without logging
+  quiet: false // Without logging
 });
 // http://mydreamisthebestcooder.tistory.com/6
 app.use(bodyParser.json());
