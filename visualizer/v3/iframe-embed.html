@@ -23,131 +23,167 @@
 <script type="text/javascript" src="js/opt-frontend-common.js"></script>
 <script type="text/javascript" src="js/iframe-embed.js"></script>
 <script type="text/javascript">
-/*
-function onReady(myVisualizer){
-	console.log(myVisualizer);
-	myVisualizer.add_pytutor_hook(
-		"end_renderDataStructures",
-		function(args) {
-			console.log("end_renderDataStructures");
-			var myViz = args.obj; // unpack
-			innerFrameArrange(myViz);
-			return [false]; // didn't handle it, let someone else
+	/*
+	function onReady(myVisualizer){
+		console.log(myVisualizer);
+		myVisualizer.add_pytutor_hook(
+			"end_renderDataStructures",
+			function(args) {
+				console.log("end_renderDataStructures");
+				var myViz = args.obj; // unpack
+				innerFrameArrange(myViz);
+				return [false]; // didn't handle it, let someone else
+			}
+		);
+	}
+	*/
+	function innerFrameArrange(){
+		try {
+			$($('.stackFrame').get().reverse()).each(function(idx, aFrame){
+				aFrame = $(aFrame);
+				if (!aFrame.attr('data-parent_frame_id'))
+					return;
+				var parentFrame = $('div [data-frame_id=' + aFrame.attr('data-parent_frame_id') + ']');
+				if (!parentFrame)
+					return;
+				parentFrame.append(aFrame.remove());
+			});
+			myVisualizer.redrawConnectors();
+		} catch (err) {
+			//console.log("hmm...");
 		}
-	);
-}
-*/
-function innerFrameArrange(){
-	$($('.stackFrame').get().reverse()).each(function(idx, aFrame){
-		aFrame = $(aFrame);
-		if (!aFrame.attr('data-parent_frame_id'))
-			return;
-		var parentFrame = $('div [data-frame_id=' + aFrame.attr('data-parent_frame_id') + ']');
-		if (!parentFrame)
-			return;
-		parentFrame.append(aFrame.remove());
+	}
+	$(document).ready(function(){
+		var iInterval = setInterval(function(){innerFrameArrange()}, 100);
 	});
-	myVisualizer.redrawConnectors();
-}
-$(document).ready(function(){
-	var iInterval = setInterval(function(){innerFrameArrange()}, 100);
-});
-
 </script>
 <script type="text/javascript">
-function setInputCase(sysin){
-	system.sysin = sysin.split('\n');
-	system.curser = 0;
-	// may cause bug;
+	function setInputCase(sysin){
+		system.sysin = sysin.split('\n');
+		system.curser = 0;
+		// may cause bug;
+		onInputRequired.detectedInstr = [];
+	}
+	function submitInput(content){
+		let $v = myVisualizer.domRoot
+		let sysin = $v.find('input#raw_input_textbox').get(0);
+		let submit = $v.find('button#raw_input_submit_btn').get(0);
+		// http://secr.tistory.com/255
+		$(sysin).val(content);
+		$(sysin).trigger(jQuery.Event( "keydown", { keyCode: 13 } ));
+		//$(submit).click()	
+	}
+
+	var system = {
+		  in : function(idx){ return this.sysin[idx]}
+		, sysin : [
+			// default is empty
+		]
+		, curser : 0
+		, next : function(){
+			let item = this.in(this.curser);
+			if (item)
+				this.curser++;
+			return item;
+		}
+	}
+
+	var onInputRequired = function(curLineNumber){
+		var content = system.next();
+		//console.log(curLineNumber, "onInputRequired", content);
+		submitInput(content);
+	}
 	onInputRequired.detectedInstr = [];
-}
-function submitInput(content){
-	let $v = myVisualizer.domRoot
-	let sysin = $v.find('input#raw_input_textbox').get(0);
-	let submit = $v.find('button#raw_input_submit_btn').get(0);
-	// http://secr.tistory.com/255
-	$(sysin).val(content);
-	$(sysin).trigger(jQuery.Event( "keydown", { keyCode: 13 } ));
-	//$(submit).click()	
-}
+	onInputRequired.detectinputRequireEventThread = setInterval(
+		function(){
+			try {
+				if (isInputRequired(myVisualizer.domRoot) && !onInputRequired.detectedInstr.includes(myVisualizer.curInstr)){
+					onInputRequired.detectedInstr.push(myVisualizer.curInstr);
+					onInputRequired(myVisualizer.curInstr);
+				}
+			} catch(err) {
 
-var system = {
-	  in : function(idx){ return this.sysin[idx]}
-	, sysin : [
-		// default is empty
-	]
-	, curser : 0
-	, next : function(){
-		let item = this.in(this.curser);
-		if (item)
-			this.curser++;
-		return item;
-	}
-}
-
-var onInputRequired = function(curLineNumber){
-	var content = system.next();
-	//console.log(curLineNumber, "onInputRequired", content);
-	submitInput(content);
-}
-onInputRequired.detectedInstr = [];
-onInputRequired.detectinputRequireEventThread = setInterval(
-	function(){
-		if (isInputRequired(myVisualizer.domRoot) && !onInputRequired.detectedInstr.includes(myVisualizer.curInstr)){
-			onInputRequired.detectedInstr.push(myVisualizer.curInstr);
-			onInputRequired(myVisualizer.curInstr);
+			}
 		}
+		, 100);
+	function isInputRequired($){
+		if ($)
+			return $.find('#curInstr').text() == "유저 입력을 입력하십시오 : ";
+		return myVisualizer.domRoot.find('#curInstr').text() == "유저 입력을 입력하십시오 : ";
 	}
-	, 100);
-function isInputRequired($){
-	if ($)
-		return $.find('#curInstr').text() == "유저 입력을 입력하십시오 : ";
-	return myVisualizer.domRoot.find('#curInstr').text() == "유저 입력을 입력하십시오 : ";
-}
 </script>
 <script type="text/javascript">
-$(document).ready(function(){
-	let qid = $.getUrlVar("qid")
-	let idx = $.getUrlVar("idx")
-	if (!qid || !idx)
-		return;
-
-	var URL = "http://" + location.hostname + ":3300/api/questions";
-	$.ajax({
-		url : URL
-		, settings : {cathe:false}
-		, dataType : "jsonp"
-		, jsonp : "callback"
-	})
-	.done(function(data){
-		window.data = eval(data);
-		console.log("request ajax done.", data);
-		var aQuestion = undefined;
-		$(data).each(function(idx,val){
-			if (val.id == qid)
-				aQuestion = val;
-		});
-		if (!aQuestion)
+	$(document).ready(function(){
+		let qid = $.getUrlVar("qid")
+		let idx = $.getUrlVar("idx")
+		if (!qid || !idx)
 			return;
-		setInputCase(aQuestion.testcase[idx].input);
-	});
-});
 
-$.extend({
-    getUrlVars: function(){
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        return vars;
-    },
-    getUrlVar: function(name) {
-        return $.getUrlVars()[name];
-    }
-});
+		var URL = "http://" + location.hostname + ":3300/api/questions";
+		$.ajax({
+			url : URL
+			, settings : {cathe:false}
+			, dataType : "jsonp"
+			, jsonp : "callback"
+		})
+		.done(function(data){
+			window.data = eval(data);
+			console.log("request ajax done.", data);
+			var aQuestion = undefined;
+			$(data).each(function(idx,val){
+				if (val.id == qid)
+					aQuestion = val;
+			});
+			if (!aQuestion)
+				return;
+			setInputCase(aQuestion.testcase[idx].input);
+		});
+	});
+
+	$.extend({
+	    getUrlVars: function(){
+	        var vars = [], hash;
+	        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	        for(var i = 0; i < hashes.length; i++) {
+	            hash = hashes[i].split('=');
+	            vars.push(hash[0]);
+	            vars[hash[0]] = hash[1];
+	        }
+	        return vars;
+	    },
+	    getUrlVar: function(name) {
+	        return $.getUrlVars()[name];
+	    }
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		syntaxInterval = setInterval(
+			function(){
+				if (isSyntaxError()){
+					clearInterval(syntaxInterval);
+					close();
+					alert("문법 에러입니다. 코드를 다시 한번 확인해 주세요.");
+				}
+			}
+			, 200);
+		runtimeInterval = setInterval(
+			function(){
+				if (isRuntimeError()){
+					$('#errorOutput').html("런타임 에러가 발생했습니다 : <br/>" + $('#errorOutput').text())
+				}
+			}
+			, 200);
+	});
+	function isSyntaxError(){
+		return $('#vizDiv').text().indexOf("SyntaxError") != -1;
+	}
+	function isRuntimeError(){
+		return $('#errorOutput').html().length > 4 && $('#errorOutput').html().indexOf("런타임") == -1;
+	}
+	function setContent(str){
+		$('#vizDiv').text(str);
+	}
 </script>
 </head>
 

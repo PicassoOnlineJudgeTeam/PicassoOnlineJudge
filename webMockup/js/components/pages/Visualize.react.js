@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import VisualForm from '../VisualForm.react';
+import { Button, Icon, Modal } from 'semantic-ui-react'
 
 let style = {
     cmd : {
@@ -23,14 +24,14 @@ let style = {
 
 class Visualize extends Component {
   render() {
-    debugger;
     let result = JSON.parse(decodeURIComponent(this.props.params.executionResult));
+    //<Link to={"/solve/" + result.questionId} className="btn btn--solve">Solve</Link>
     return (
         <article>
           <section className="text-section">
             <h1>Visualize</h1>
             <div style={{position:"relative", top:"-45px", left:"680px"}}>
-                <Link to={"/solve/" + result.questionId} className="btn btn--solve">Solve</Link>
+                <Button className="btn btn--modal" id="btn" onClick={function(){window.close()}}>Solve</Button>
             </div>
             <div>
                 <VisualForm source={result}/>

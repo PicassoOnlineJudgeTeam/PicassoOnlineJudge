@@ -96,11 +96,6 @@ function checkAuth(nextState, replaceState) {
 
 // Mostly boilerplate, except for the Routes. These are the pages you can go to,
 // which are all wrapped in the App component, which contains the navigation etc
-console.log("-------")
-console.log(store)
-console.log(browserHistory)
-console.log(App)
-console.log("#######")
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
