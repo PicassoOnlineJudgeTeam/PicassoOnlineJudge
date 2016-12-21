@@ -108,11 +108,11 @@ ReactDOM.render(
           <Route path="/list" component={List} />
           <Route path="/question" component={Question} />
           <Route path="/question/:id" component={Question} />
+          <Route path="/visualize/:executionResult" component={Visualize} />
+          <Route path="/visualize" component={Visualize} />
           <Route path="/solve" component={Solve} />
           <Route path="/solve/:id" component={Solve} />
         </Route>
-        <Route path="/visualize/:executionResult" component={Visualize} />
-        <Route path="/visualize" component={Visualize} />
       </Route>
     </Router>
   </Provider>,
