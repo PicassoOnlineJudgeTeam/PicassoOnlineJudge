@@ -24,7 +24,13 @@ class ModalForm extends Component {
     this.setState({ closeOnEscape, closeOnDocumentClick, open: true });
 
     let tryAjax2 = () => {
-        var result = this.state.compileResult.indexOf(false) === -1 ? "PASS" : "FAIL";
+      debugger;
+        var result = "PASS";
+        $(this.state.compileResult).each(function(idx, val){
+          if (!val.flag){
+            result = "FAIL";
+          }
+        });
         var d = new Date();
         var submitTime = leadingZeros(d.getFullYear(), 4) + '-' +
                         leadingZeros(d.getMonth() + 1, 2) + '-' +
