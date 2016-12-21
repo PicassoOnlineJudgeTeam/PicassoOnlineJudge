@@ -25,13 +25,13 @@ let style = {
 class Visualize extends Component {
   render() {
     let result = JSON.parse(decodeURIComponent(this.props.params.executionResult));
-    //<Link to={"/solve/" + result.questionId} className="btn btn--solve">Solve</Link>
     return (
         <article>
           <section className="text-section">
             <h1>Visualize</h1>
             <div style={{position:"relative", top:"-45px", left:"680px"}}>
-                <Button className="btn btn--modal" id="btn" onClick={function(){window.close()}}>Solve</Button>
+                <Link to={"/solve/" + result.questionId} className="btn btn--solve">Solve</Link>
+                {/*<Button className="btn btn--modal" id="btn" onClick={function(){window.close()}}>Solve</Button>*/}
             </div>
             <div>
                 <VisualForm source={result}/>
